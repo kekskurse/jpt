@@ -11,7 +11,17 @@
         <?php
         foreach($list as $entry)
         {
-        	echo "<tr><td>".$entry["name"]."</td><td>".$entry["mail"]."</td><td>".nl2br($entry["more"])."</td><td><a href='/loko/groups/edit?id=".$entry["id"]."'>[EDIT]</a><a href='/loko/groups/del?id=".$entry["id"]."'>[DEL]</a></td></tr>";
+        	echo "<tr><td>";
+        	if(!$entry["aktiv"])
+        	{
+        		echo "<i>";
+        	}
+        	echo $entry["name"];
+        	if(!$entry["aktiv"])
+        	{
+        		echo "<br>(INAKTIV)</i>";
+        	}
+        	echo "</td><td>".$entry["mail"]."</td><td>".nl2br($entry["more"])."</td><td><a href='/loko/groups/edit?id=".$entry["id"]."'>[EDIT]</a><a href='/loko/groups/del?id=".$entry["id"]."'>[DEL]</a></td></tr>";
         }
         ?>
       </table>

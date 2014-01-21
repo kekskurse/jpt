@@ -118,7 +118,7 @@ $app->get("/loko/groups", function() use($app, $pdo)
 });
 $app->get("/loko/groups/new", function() use($app, $pdo)
 {
-	$app->render('loko/groups_new.php', array("id"=>"NEW", "name"=>"", "mail"=>"","more"=>""));
+	$app->render('loko/groups_new.php', array("id"=>"NEW", "name"=>"", "mail"=>"","more"=>"","aktiv"=>true));
 });
 $app->post("/loko/groups/new", function() use($app, $pdo)
 {
@@ -132,13 +132,19 @@ $app->get("/loko/groups/edit", function() use($app, $pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$detais = $loko->getGroups($app->request->params('id'));
-	$app->render('loko/groups_new.php', array("id"=>$detais["id"], "name"=>$detais["name"], "mail"=>$detais["mail"],"more"=>$detais["more"]));
+	$app->render('loko/groups_new.php', array("id"=>$detais["id"], "name"=>$detais["name"], "mail"=>$detais["mail"],"more"=>$detais["more"],"aktiv"=>$detais["aktiv"]));
 });
 $app->post("/loko/groups/edit", function() use($app, $pdo)
 {
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
-	$loko->updateGroup($app->request->params('id'), $app->request->params('name'),$app->request->params('mail'),$app->request->params('more'));
+	$aktiv = false;
+	#var_dump($app->request->params('aktiv'));exit();
+	if($app->request->params('aktiv')=="on")
+	{
+		$aktiv=true;
+	}
+	$loko->updateGroup($app->request->params('id'), $app->request->params('name'),$app->request->params('mail'),$app->request->params('more'),$aktiv);
 	$app->redirect('/loko/groups');
 });
 $app->get("/loko/groups/del", function() use($app, $pdo)
