@@ -3,20 +3,58 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "76573640bfdcf0b8fad898ae70788e68",
+    "hash": "5a60d66eccd676463f8649cf879fde67",
     "packages": [
+        {
+            "name": "dg/twitter-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dg/twitter-php.git",
+                "reference": "5ca5b8cb823972e1239656c5f3b17ddd28e6d816"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dg/twitter-php/zipball/5ca5b8cb823972e1239656c5f3b17ddd28e6d816",
+                "reference": "5ca5b8cb823972e1239656c5f3b17ddd28e6d816",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "http://davidgrudl.com"
+                }
+            ],
+            "description": "Small and easy Twitter wrapper for PHP.",
+            "homepage": "https://github.com/dg/twitter-php",
+            "keywords": [
+                "oauth",
+                "twitter"
+            ],
+            "time": "2014-01-17 16:59:53"
+        },
         {
             "name": "easylib/pdow",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/easylib/PDOW.git",
-                "reference": "2a68e3566b43620a0d1a242119b17c16be3ce0a9"
+                "reference": "308e2dc1db9531e54a7f3156fe0d66848e56fe11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/easylib/PDOW/zipball/2a68e3566b43620a0d1a242119b17c16be3ce0a9",
-                "reference": "2a68e3566b43620a0d1a242119b17c16be3ce0a9",
+                "url": "https://api.github.com/repos/easylib/PDOW/zipball/308e2dc1db9531e54a7f3156fe0d66848e56fe11",
+                "reference": "308e2dc1db9531e54a7f3156fe0d66848e56fe11",
                 "shasum": ""
             },
             "require": {
@@ -35,7 +73,60 @@
                     "email": "kruemel@schredder.pw"
                 }
             ],
-            "time": "2014-01-20 15:24:25"
+            "time": "2014-01-21 08:57:58"
+        },
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer.git",
+                "reference": "6767b0f21bd24d9ca7e0efcde640705772dedcbf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/6767b0f21bd24d9ca7e0efcde640705772dedcbf",
+                "reference": "6767b0f21bd24d9ca7e0efcde640705772dedcbf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "class.phpmailer.php",
+                    "class.pop3.php",
+                    "class.smtp.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
+                },
+                {
+                    "name": "Marcus Bointon",
+                    "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Andy Prevost",
+                    "email": "codeworxtech@users.sourceforge.net"
+                },
+                {
+                    "name": "Brent R. Matzelle"
+                }
+            ],
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "time": "2013-12-30 21:37:28"
         },
         {
             "name": "slim/slim",
@@ -89,12 +180,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sspssp/phpNNTP.git",
-                "reference": "b1757c35141ae61e45b02f11aa5e7ba5003fe9c6"
+                "reference": "99497be3d00410075cab020949fe1f0eaedb0342"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sspssp/phpNNTP/zipball/b1757c35141ae61e45b02f11aa5e7ba5003fe9c6",
-                "reference": "b1757c35141ae61e45b02f11aa5e7ba5003fe9c6",
+                "url": "https://api.github.com/repos/sspssp/phpNNTP/zipball/99497be3d00410075cab020949fe1f0eaedb0342",
+                "reference": "99497be3d00410075cab020949fe1f0eaedb0342",
                 "shasum": ""
             },
             "require": {
@@ -116,7 +207,7 @@
                     "email": "kruemel@schredder.pw"
                 }
             ],
-            "time": "2013-12-23 10:56:29"
+            "time": "2014-01-21 09:48:28"
         },
         {
             "name": "twitter/bootstrap",
@@ -170,7 +261,9 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "sspssp/nntp": 20,
-        "easylib/pdow": 20
+        "easylib/pdow": 20,
+        "phpmailer/phpmailer": 20,
+        "dg/twitter-php": 20
     },
     "platform": [
 

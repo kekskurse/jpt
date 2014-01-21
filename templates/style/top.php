@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
-
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!-- Custom styles for this template -->
    <!-- <link href="grid.css" rel="stylesheet">!-->
 
@@ -40,10 +40,10 @@
     </a>
     <ul class="dropdown-menu">
       <li><a href="/loko/member">LoKo Menschen</a></li>
-      <li><a href="#">Mumble Einladungen</a></li>
-      <li><a href="#">Persöhnliche Einladungen</a></li>
-      <li><a href="#">Information Versenden</a></li>
-      <li><a href="#">Ansprechpartner</a></li>
+      <li><a href="/loko/invite">Mumble Einladungen</a></li>
+      <li><a href="/loko/invite/person">Persöhnliche Einladungen</a></li>
+      <li><a href="/loko/contact">Ansprechpartner</a></li>
+      <li><a href="/loko/groups">Gruppen</a></li>
     </ul>
   </li>
   <!--<li class="dropdown">
