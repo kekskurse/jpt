@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>Grid Template for Bootstrap</title>
+    <title>JPT</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
