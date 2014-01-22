@@ -10,7 +10,7 @@ if(!file_exists("../config/config.php"))
 }
 require '../config/config.php';
 $pdo = new Easy\PDOW\PDOW();
-$pdo->connect($mysql["host"], $mysql["user"], $mysql["pw"], $mysql["db"]);
+$pdo->connect($mysql["host"], $mysql["user"], $mysql["pw"], $mysql["db"], true);
 
 
 $app = new \Slim\Slim(

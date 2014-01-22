@@ -109,6 +109,7 @@ $app->post("/loko/contact/new", function() use($app, $pdo)
 	$loko->addPeople($app->request->params('name'), $app->request->params('mail'), $app->request->params('group'), $app->request->params('more'));
 	$app->redirect('/loko/contact');
 });
+/*GROUPS */
 $app->get("/loko/groups", function() use($app, $pdo)
 {
 	$loko = new Jupis\LoKo();
@@ -154,5 +155,12 @@ $app->get("/loko/groups/del", function() use($app, $pdo)
 	$loko->delGroup($app->request->params('id'));
 	#$loko->updateGroup($app->request->params('id'), $app->request->params('name'),$app->request->params('mail'),$app->request->params('more'));
 	$app->redirect('/loko/groups');
+});
+$app->get("/loko/groups/search", function() use($app, $pdo)
+{
+	$loko = new Jupis\LoKo();
+	$loko->setPDO($pdo);
+	$list = $loko->searchGroups($app->request->params('q'));
+	echo json_encode($list);
 });
 

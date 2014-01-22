@@ -111,11 +111,41 @@ class LoKo
 		$sql = "DELETE FROM `lokogruppen` WHERE id = ?";
 		$this->pdo->insert($sql, array($id));
 	}
-	public function listGroups()
+	public function listGroups($aktiv = 1)
 	{
 		$sql = 'SELECT `id`, `name` AS `groupName`, `mail`, `more`, `aktiv`, `bundesland`, `typ`, `wiki`, CONCAT(`typ`, " ", `name`) AS `name` FROM `lokogruppen`';
+		if($aktiv==1)
+		{
+			$sql .= 'WHERE `aktiv` = 1';
+		}
 		$res = $this->pdo->query($sql, array());
 		return $res;
+	}
+	public function searchGroups($searchstring)
+	{
+		#$sql = 'SELECT `id`, `name` AS `groupName`, `mail`, `more`, `aktiv`, `bundesland`, `typ`, `wiki`, CONCAT(`typ`, " ", `name`) AS `name` FROM `lokogruppen` WHERE `name` LIKE "%?%"';
+		#$res = $this->pdo->query($sql, array($searchstring));
+		#var_dump($res);
+		if($searchstring=="")
+		{
+			return $this->listGroups();
+		}
+		$res = $this->listGroups(0);
+		$tmp = array();
+		foreach($res as $r)
+		{
+			//NAME
+			if(strpos(strtolower($r["name"]), strtolower($searchstring)))
+			{
+				$tmp[] = $r;
+			}
+			//Bundesland
+			if(strtolower($r["bundesland"])==strtolower($searchstring))
+			{
+				$tmp[] = $r;
+			}
+		}
+		return $tmp;
 	}
 	public function getGroups($id)
 	{
