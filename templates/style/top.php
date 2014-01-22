@@ -46,14 +46,14 @@
       <li><a href="/loko/groups">Gruppen</a></li>
     </ul>
   </li>
-  <!--<li class="dropdown">
+  <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
       Projektderps
     </a>
     <ul class="dropdown-menu">
-      <li><a href="#">Reminder</a></li>
+      <li><a href="/lists">Listen</a></li>
     </ul>
-  </li>!-->
+  </li>
 </ul>
         </div>
         <h1>JPT</h1>

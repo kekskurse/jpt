@@ -23,5 +23,6 @@ $app->add(new \AllCapsMiddleware());
 require "../controller/test.php";
 require "../controller/public.php";
 require "../controller/loko.php";
+require "../controller/lists.php";
 
 $app->run();
