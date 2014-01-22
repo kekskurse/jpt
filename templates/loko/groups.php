@@ -32,7 +32,7 @@
       $("#q").keyup(function() {
           $("#groups tr").remove();
           $('#groups').append("<tr><th>Gruppen Name</th><th>Gruppen E-Mail</th><th>Weiteres</th><th>Aktionen</th></tr>");
-          $.getJSON( "http://jpt/loko/groups/search?q="+$("#q").val(), function( data ) {
+          $.getJSON( "/loko/groups/search?q="+$("#q").val(), function( data ) {
             $.each( data, function( key, val ) {
               $('#groups').append("<tr><td>"+val["name"]+"</td><td>"+val["mail"]+"</td><td>"+val["more"]+"</td><td><a href='/loko/groups/edit?id="+val["id"]+"'>[EDIT]</a><a href='/loko/groups/del?id="+val["id"]+"'>[DEL]</a><a href='https://wiki.junge-piraten.de/wiki/"+val["wiki"]+"' target='_blank'>[WIKI]</a></td></tr>");
               console.log(val);
