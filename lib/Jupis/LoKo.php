@@ -182,5 +182,30 @@ class LoKo
 		$sql = "DELETE FROM `lokopeople` WHERE id = ?";
 		$this->pdo->insert($sql, array($id));
 	}
+	public function searchPeople($searchstring)
+	{
+		#$sql = 'SELECT `id`, `name` AS `groupName`, `mail`, `more`, `aktiv`, `bundesland`, `typ`, `wiki`, CONCAT(`typ`, " ", `name`) AS `name` FROM `lokogruppen` WHERE `name` LIKE "%?%"';
+		#$res = $this->pdo->query($sql, array($searchstring));
+		#var_dump($res);
+		if($searchstring=="")
+		{
+			return $this->listPeople();
+		}
+		$res = $this->listPeople();
+		$tmp = array();
+		foreach($res as $r)
+		{
+			//NAME
+			if(strpos(strtolower($r["name"]), strtolower($searchstring))!==false)
+			{
+				$tmp[] = $r;
+			}
+			if($searchstring=="group:".$r["group"])
+			{
+				$tmp[] = $r;
+			}
+		}
+		return $tmp;
+	}
 }
 ?>

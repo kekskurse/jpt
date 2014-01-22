@@ -71,7 +71,7 @@ $app->get("/loko/contact", function() use($app, $pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$list = $loko->listPeople();
-	$app->render('loko/contact.php', array("list"=>$list));
+	$app->render('loko/contact.php', array("q"=>$app->request->params('q')));
 });
 $app->get("/loko/contact/edit", function() use($app, $pdo)
 {
@@ -108,6 +108,13 @@ $app->post("/loko/contact/new", function() use($app, $pdo)
 	$loko->setPDO($pdo);
 	$loko->addPeople($app->request->params('name'), $app->request->params('mail'), $app->request->params('group'), $app->request->params('more'));
 	$app->redirect('/loko/contact');
+});
+$app->get("/loko/contact/search", function() use($app, $pdo)
+{
+	$loko = new Jupis\LoKo();
+	$loko->setPDO($pdo);
+	$list = $loko->searchPeople($app->request->params('q'));
+	echo json_encode($list);
 });
 /*GROUPS */
 $app->get("/loko/groups", function() use($app)
@@ -170,5 +177,11 @@ $app->get("/loko/groups/search", function() use($app, $pdo)
 	$loko->setPDO($pdo);
 	$list = $loko->searchGroups($app->request->params('q'));
 	echo json_encode($list);
+});
+$app->get("/loko/groups/detais", function() use($app, $pdo)
+{
+	$loko = new Jupis\LoKo();
+	$loko->setPDO($pdo);
+	$app->ender("loko/group_detais.php", array());
 });
 
