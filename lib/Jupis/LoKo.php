@@ -113,7 +113,7 @@ class LoKo
 	}
 	public function listGroups()
 	{
-		$sql = "SELECT `id`, `name`, `mail`, `more`, `aktiv` FROM `lokogruppen`";
+		$sql = 'SELECT `id`, `name` AS `groupName`, `mail`, `more`, `aktiv`, `bundesland`, `typ`, `wiki`, CONCAT(`typ`, " ", `name`) AS `name` FROM `lokogruppen`';
 		$res = $this->pdo->query($sql, array());
 		return $res;
 	}
