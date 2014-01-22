@@ -96,15 +96,16 @@ class LoKo
 		}
 		return $send;
 	}
-	public function createGroup($name, $mail, $more)
+	public function createGroup($name, $mail, $more, $aktiv, $typ, $bundesland, $wiki)
 	{
-		$sql = "INSERT INTO `lokogruppen`(`name`, `mail`, `more`, `aktiv`) VALUES (?, ?, ? , 1)";
-		$id = $this->pdo->insertID($sql, array($name, $mail, $more));
+		#var_dump($wiki);exit();
+		$sql = "INSERT INTO `lokogruppen`(`name`, `mail`, `more`, `aktiv`, `typ`, `bundesland`, `wiki`) VALUES (?, ?, ? , ?, ?, ?, ?)";
+		$id = $this->pdo->insertID($sql, array($name, $mail, $more, $aktiv, $typ, $bundesland, $wiki));
 	}
-	public function updateGroup($id, $name, $mail, $more, $aktiv)
+	public function updateGroup($id, $name, $mail, $more, $aktiv, $typ, $bundesland, $wiki)
 	{
-		$sql = "UPDATE `lokogruppen` SET `name`=?,`mail`=?,`more`=?, `aktiv` = ? WHERE id = ?";
-		$this->pdo->insert($sql, array($name, $mail, $more,$aktiv, $id));
+		$sql = "UPDATE `lokogruppen` SET `name`=?,`mail`=?,`more`=?, `aktiv` = ?, `bundesland` = ?, `typ` = ?, `wiki`= ? WHERE id = ?";
+		$this->pdo->insert($sql, array($name, $mail, $more,$aktiv,$bundesland, $typ, $wiki, $id));
 	}
 	public function delGroup($id)
 	{
@@ -149,7 +150,7 @@ class LoKo
 	}
 	public function getGroups($id)
 	{
-		$sql = "SELECT `id`, `name`, `mail`, `more`, `aktiv` FROM `lokogruppen` WHERE id = ?";
+		$sql = 'SELECT `id`, `name` AS `groupName`, `mail`, `more`, `aktiv`, `bundesland`, `typ`, `wiki`, CONCAT(`typ`, " ", `name`) AS `name` FROM `lokogruppen` WHERE id = ?';
 		$res = $this->pdo->query($sql, array($id));
 		return $res[0];
 	}

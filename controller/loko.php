@@ -110,22 +110,29 @@ $app->post("/loko/contact/new", function() use($app, $pdo)
 	$app->redirect('/loko/contact');
 });
 /*GROUPS */
-$app->get("/loko/groups", function() use($app, $pdo)
+$app->get("/loko/groups", function() use($app)
 {
-	$loko = new Jupis\LoKo();
-	$loko->setPDO($pdo);
-	$list = $loko->listGroups();
-	$app->render('loko/groups.php', array("list"=>$list));
+	//$loko = new Jupis\LoKo();
+	//$loko->setPDO($pdo);
+	//$list = $loko->listGroups();
+	$app->render('loko/groups.php', array());
 });
 $app->get("/loko/groups/new", function() use($app, $pdo)
 {
-	$app->render('loko/groups_new.php', array("id"=>"NEW", "name"=>"", "mail"=>"","more"=>"","aktiv"=>true));
+	$bundeslaender = array('baden-württemberg','bayern','berlin','brandenburg','bremen','hamburg','hessen','mecklenburg-vorpommern','niedersachsen','nordrhein-westfalen','rheinland-pfalz','saarland','sachsen','sachsen-anhalt','schleswig-holstein','thueringen');
+	$typen = array('crew','lo','lv','treffen','stammtisch','sonstiges');
+	$app->render('loko/groups_new.php', array("id"=>"NEW", "name"=>"", "mail"=>"","more"=>"","aktiv"=>true, "bundesland"=>"", "listelaender"=>$bundeslaender, "wiki"=>"", "typen"=>$typen, "typ"=>""));
 });
 $app->post("/loko/groups/new", function() use($app, $pdo)
 {
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
-	$loko->createGroup($app->request->params('name'),$app->request->params('mail'),$app->request->params('more'));
+	$aktiv = false;
+	if($app->request->params('aktiv')=="on")
+	{
+		$aktiv=true;
+	}
+	$loko->createGroup($app->request->params('name'),$app->request->params('mail'),$app->request->params('more'),$aktiv,$app->request->params('typ'),$app->request->params('bundesland'),$app->request->params('wiki'));
 	$app->redirect('/loko/groups');
 });
 $app->get("/loko/groups/edit", function() use($app, $pdo)
@@ -133,19 +140,20 @@ $app->get("/loko/groups/edit", function() use($app, $pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$detais = $loko->getGroups($app->request->params('id'));
-	$app->render('loko/groups_new.php', array("id"=>$detais["id"], "name"=>$detais["name"], "mail"=>$detais["mail"],"more"=>$detais["more"],"aktiv"=>$detais["aktiv"]));
+	$bundeslaender = array('baden-württemberg','bayern','berlin','brandenburg','bremen','hamburg','hessen','mecklenburg-vorpommern','niedersachsen','nordrhein-westfalen','rheinland-pfalz','saarland','sachsen','sachsen-anhalt','schleswig-holstein','thueringen');
+	$typen = array('crew','lo','lv','treffen','stammtisch','sonstiges');
+	$app->render('loko/groups_new.php', array("id"=>$detais["id"], "name"=>$detais["groupName"], "mail"=>$detais["mail"],"more"=>$detais["more"],"aktiv"=>$detais["aktiv"],"bundesland"=>$detais["bundesland"], "listelaender"=>$bundeslaender, "wiki"=>$detais["wiki"], "typen"=>$typen, "typ"=>$detais["typ"]));
 });
 $app->post("/loko/groups/edit", function() use($app, $pdo)
 {
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$aktiv = false;
-	#var_dump($app->request->params('aktiv'));exit();
 	if($app->request->params('aktiv')=="on")
 	{
 		$aktiv=true;
 	}
-	$loko->updateGroup($app->request->params('id'), $app->request->params('name'),$app->request->params('mail'),$app->request->params('more'),$aktiv);
+	$loko->updateGroup($app->request->params('id'), $app->request->params('name'),$app->request->params('mail'),$app->request->params('more'),$aktiv,$app->request->params('typ'),$app->request->params('bundesland'),$app->request->params('wiki'));
 	$app->redirect('/loko/groups');
 });
 $app->get("/loko/groups/del", function() use($app, $pdo)
