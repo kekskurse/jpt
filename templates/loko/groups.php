@@ -21,7 +21,7 @@
         	{
         		echo "<br>(INAKTIV)</i>";
         	}
-        	echo "</td><td>".$entry["mail"]."</td><td>".nl2br($entry["more"])."</td><td><a href='/loko/groups/edit?id=".$entry["id"]."'>[EDIT]</a><a href='/loko/groups/del?id=".$entry["id"]."'>[DEL]</a></td></tr>";
+        	echo "</td><td>".$entry["mail"]."</td><td>".nl2br($entry["more"])."</td><td><a href='/loko/groups/edit?id=".$entry["id"]."'>[EDIT]</a><a href='/loko/groups/del?id=".$entry["id"]."'>[DEL]</a><a href='https://wiki.junge-piraten.de/wiki/".$entry["wiki"]."' target='_blank'>[WIKI]</td></tr>";
         }
         ?>
       </table>
