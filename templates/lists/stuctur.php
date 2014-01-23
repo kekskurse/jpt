@@ -18,9 +18,9 @@
         ?>
       </table>
       <hr>
-      <form method="POST">
-        <b>Bezeichnung:</b><br>
-        <input type="text" class="form-control"  name="name" placeholder="Bezeichnung"><br>
+      <form method="POST" id="structurform">
+        <b>Bezeichnung:</b> <span id="nameError" style="color:red;display:none;">Nur Buchestaben a-z und A-Z</span><br>
+        <input type="text" id="nameInput" class="form-control"  name="name" placeholder="Bezeichnung"><br>
         <b>Typ:</b><br>
         <select name="typ" class="form-control">
           <option value="int">Ganzzahl</option>
@@ -30,6 +30,25 @@
         <br>
         <input type="submit" class="btn btn-default" value="Hinzufügen">
       </form>
+      <script>
+      $('#nameInput').keyup(function() {
+        $('#nameError').hide();
+        var inputVal = $(this).val();
+        var numericReg = /^[a-zA-Z]*$/;
+        if(!numericReg.test(inputVal)) {
+            $('#nameError').show();
+        }
+    });
+      $( "#structurform" ).submit(function() {
+        var inputVal = $("#nameInput").val();
+        var numericReg = /^[a-zA-Z]*$/;
+        if(!numericReg.test(inputVal)) {
+          alert("Nur Buchestaben a-z und A-Z");
+            return false;
+        }
+        return true;
+      });
+      </script>
    
 
       
