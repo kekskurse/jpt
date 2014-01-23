@@ -126,7 +126,7 @@ $app->get("/loko/groups", function() use($app)
 });
 $app->get("/loko/groups/new", function() use($app, $pdo)
 {
-	$bundeslaender = array('baden-württemberg','bayern','berlin','brandenburg','bremen','hamburg','hessen','mecklenburg-vorpommern','niedersachsen','nordrhein-westfalen','rheinland-pfalz','saarland','sachsen','sachsen-anhalt','schleswig-holstein','thueringen');
+	$bundeslaender = array('baden-württemberg','bayern','berlin','brandenburg','bremen','hamburg','hessen','mecklenburg-vorpommern','niedersachsen','nordrhein-westfalen','rheinland-pfalz','saarland','sachsen','sachsen-anhalt','schleswig-holstein','thueringen', 'ueberregional');
 	$typen = array('crew','lo','lv','treffen','stammtisch','sonstiges');
 	$app->render('loko/groups_new.php', array("id"=>"NEW", "name"=>"", "mail"=>"","more"=>"","aktiv"=>true, "bundesland"=>"", "listelaender"=>$bundeslaender, "wiki"=>"", "typen"=>$typen, "typ"=>""));
 });
@@ -147,7 +147,7 @@ $app->get("/loko/groups/edit", function() use($app, $pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$detais = $loko->getGroups($app->request->params('id'));
-	$bundeslaender = array('baden-württemberg','bayern','berlin','brandenburg','bremen','hamburg','hessen','mecklenburg-vorpommern','niedersachsen','nordrhein-westfalen','rheinland-pfalz','saarland','sachsen','sachsen-anhalt','schleswig-holstein','thueringen');
+	$bundeslaender = array('baden-württemberg','bayern','berlin','brandenburg','bremen','hamburg','hessen','mecklenburg-vorpommern','niedersachsen','nordrhein-westfalen','rheinland-pfalz','saarland','sachsen','sachsen-anhalt','schleswig-holstein','thueringen', 'ueberregional');
 	$typen = array('crew','lo','lv','treffen','stammtisch','sonstiges');
 	$app->render('loko/groups_new.php', array("id"=>$detais["id"], "name"=>$detais["groupName"], "mail"=>$detais["mail"],"more"=>$detais["more"],"aktiv"=>$detais["aktiv"],"bundesland"=>$detais["bundesland"], "listelaender"=>$bundeslaender, "wiki"=>$detais["wiki"], "typen"=>$typen, "typ"=>$detais["typ"]));
 });
