@@ -23,9 +23,7 @@
             head = head + "<th>Aktionen</th>";
             head = head + "</tr>";
             $('#groups').append(head);
-          });
-          //"<tr><th>ListName</th><th>Aktiv</th><th>Aktionen</th></tr>");
-          $.getJSON( "/lists/list/entries?id=<?php echo $id; ?>&q="+$("#q").val(), function( data ) {
+            $.getJSON( "/lists/list/entries?id=<?php echo $id; ?>&q="+$("#q").val(), function( data ) {
             $.each( data, function( key, val ) {
               var line = "<tr>";
                 $.each(val, function (k, v) {
@@ -33,10 +31,11 @@
                 });
               line = line + "<td></td></tr>";
               $('#groups').append(line);
-              //$('#groups').append("<tr><td>"+val["name"]+"</td><td>"+val["aktiv"]+"</td><td><a href='/lists/list?id="+val["id"]+"'>[Einträge]</a> <a href='/lists/structur?id="+val["id"]+"'>[Stuktur]</a> [Edit] [API]</td></tr>");
-              //console.log(val);
             });
           });
+          });
+          //"<tr><th>ListName</th><th>Aktiv</th><th>Aktionen</th></tr>");
+          
       });
       $( "#q" ).trigger( "keyup" );
       </script>
