@@ -3,9 +3,11 @@
         "slim/slim": "2.*",
         "twitter/bootstrap": "v3.0.3",
         "sspssp/nntp": "dev-master",
+        "sspssp/mediawikiapi": "dev-master",
         "easylib/pdow": "dev-master",
         "phpmailer/phpmailer": "dev-master",
-        "dg/twitter-php": "dev-master"
+        "dg/twitter-php": "dev-master",
+        "shuber/curl": "dev-master"
     },
     "autoload": {
         "psr-0": {
