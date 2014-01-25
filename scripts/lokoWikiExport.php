@@ -30,7 +30,7 @@ foreach($groups as $group)
 		$people = $loko->searchPeople("group:".$group["id"]);
 		if(count($people)==0)
 		{
-			$bemerkung = "'''Keine Ansprechpartner, bitte an loko@junge-piraten.de wenden!'''";
+			$bemerkung = "'''Keine [[Loko/Ansprechpartner|Ansprechpartner]], bitte an loko@junge-piraten.de wenden!'''";
 		}
 	}
 	$aktiv="Nein";
