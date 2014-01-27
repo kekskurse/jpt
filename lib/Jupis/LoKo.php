@@ -96,7 +96,7 @@ class LoKo
 		}
 		return $send;
 	}
-	public function sendMail($subject, $text, $to, $peopleID=0, $test = true, $testop)
+	public function sendMail($subject, $text, $to, $peopleID=0, $test = true, $testTo)
 	{
 		if($peopleID!=0)
 		{
