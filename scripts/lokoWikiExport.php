@@ -5,7 +5,7 @@ require __DIR__.'/../config/config.php';
 
 $mediaWiki = new SSP\MediaWiki\MediaWikiConnect();
 $mediaWiki->setAPIUrl("https://wiki.junge-piraten.de/w/api.php");
-$mediaWiki->setLoginData("sspssp", "gelnhausen");
+$mediaWiki->setLoginData($mediawiki["user"], $mediawiki["pw"]);
 $mediaWiki->login();
 
 $pdo = new Easy\PDOW\PDOW();
@@ -34,7 +34,7 @@ foreach($groups as $group)
 		}
 		if($group["mail"]=="")
 		{
-			$b[] = "Keine Gruppen E-Mail adresse."
+			$b[] = "Keine Gruppen E-Mail adresse.";
 		}
 	}
 	if(count($b)==0)
