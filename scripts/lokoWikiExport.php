@@ -24,13 +24,32 @@ $text .= '{| class="wikitable sortable" style="width:100%"
 ';
 foreach($groups as $group)
 {
-	$bemerkung = "''Keine''";
+	$b = array();
 	if($group["aktiv"]==1)
 	{
 		$people = $loko->searchPeople("group:".$group["id"]);
 		if(count($people)==0)
 		{
-			$bemerkung = "'''Keine [[Loko/Ansprechpartner|Ansprechpartner]], bitte an loko@junge-piraten.de wenden!'''";
+			$b[] = "'''Kein*e [[Loko/Ansprechpartner|Ansprechpartner*in]], bitte an loko@junge-piraten.de wenden!'''";
+		}
+		if($group["mail"]=="")
+		{
+			$b[] = "Keine Gruppen E-Mail adresse."
+		}
+	}
+	if(count($b)==0)
+	{
+		$bemerkung = "''Keine''";
+	}
+	else
+	{
+		for($i=0;$i<count($b);$i++)
+		{
+			if($i!=0)
+			{
+				$bemerkung.="\r\n";
+			}
+			$bemerkung.=$b[$i];
 		}
 	}
 	$aktiv="Nein";
