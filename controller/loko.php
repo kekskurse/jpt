@@ -65,7 +65,7 @@ $app->post("/loko/invite/person", function() use($app, $pdo)
 		$send[] = $loko->sendMail($app->request->params('subject'),  $app->request->params('text'), $l["mail"], $l["id"], $test, $_SESSION["username"]."@community.junge-piraten.de");
 		if($test)
 		{
-			break 2;
+			break;
 		}
 	}
 	#$send = $loko->invitePeople($app->request->params('subject'), $app->request->params('text'), $mails, $test, $_SESSION["username"]."@community.junge-piraten.de");
