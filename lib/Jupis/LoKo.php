@@ -116,6 +116,7 @@ class LoKo
 			$this->mail->addAddress($testTo);  // Add a recipient
 			$send[] = $testTo;
 			$this->mail->send();
+			return $testTo;
 		}
 		else
 		{
