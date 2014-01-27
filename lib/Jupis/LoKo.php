@@ -96,6 +96,37 @@ class LoKo
 		}
 		return $send;
 	}
+	public function sendMail($subject, $text, $to, $peopleID=0, $test = true, $testop)
+	{
+		if($peopleID!=0)
+		{
+			$detais = $this->getPeople($peopleID);
+			$text = str_replace("%name%", $detais["name"], $text);
+			$text = str_replace("%group%", $detais["groupName"], $text);
+		}
+		$text = mb_convert_encoding($text, "ISO-8859-1", "UTF-8");
+		$this->mail->From = 'loko@junge-piraten.de';
+		$this->mail->FromName = 'LoKo Derps';
+		$this->mail->Subject = $subject;
+		$this->mail->Body    = $text;
+		$this->mail->isHTML(false);
+		if($test)
+		{
+			#echo mb_detect_encoding($text);
+			$this->mail->addAddress($testTo);  // Add a recipient
+			$send[] = $testTo;
+			$this->mail->send();
+		}
+		else
+		{
+			$this->mail->clearAddresses();
+			$this->mail->addAddress($to);
+			$send[]=$mail;
+			$this->mail->send();
+		}
+		return $to;
+
+	}
 	public function createGroup($name, $mail, $more, $aktiv, $typ, $bundesland, $wiki)
 	{
 		#var_dump($wiki);exit();
