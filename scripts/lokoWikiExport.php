@@ -1,7 +1,7 @@
 <?php
 //Run this Script on time per Day!
-require '../vendor/autoload.php';
-require '../config/config.php';
+require __DIR__.'../vendor/autoload.php';
+require __DIR__.'../config/config.php';
 
 $mediaWiki = new SSP\MediaWiki\MediaWikiConnect();
 $mediaWiki->setAPIUrl("https://wiki.junge-piraten.de/w/api.php");
