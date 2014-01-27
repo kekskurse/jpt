@@ -1,7 +1,7 @@
 <?php
 //Run this Script on time per Day!
 require __DIR__.'/../vendor/autoload.php';
-require __DIR__.'../config/config.php';
+require __DIR__.'/../config/config.php';
 
 $twitter = new Twitter(TwitterCKEY, TwitterCSecret, TwitterAToken, TwitterASecret);
 if(date("d")==25||date("d")==30||date("d")==3)
