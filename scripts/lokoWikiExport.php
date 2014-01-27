@@ -25,6 +25,7 @@ $text .= '{| class="wikitable sortable" style="width:100%"
 foreach($groups as $group)
 {
 	$b = array();
+	$bemerkung = "";
 	if($group["aktiv"]==1)
 	{
 		$people = $loko->searchPeople("group:".$group["id"]);
