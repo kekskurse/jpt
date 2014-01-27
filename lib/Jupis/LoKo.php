@@ -121,7 +121,7 @@ class LoKo
 		{
 			$this->mail->clearAddresses();
 			$this->mail->addAddress($to);
-			$send[]=$mail;
+			$send[]=$to;
 			$this->mail->send();
 		}
 		return $to;

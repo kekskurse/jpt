@@ -22,9 +22,9 @@
       <form method="post">
         <input type="text" class="form-control" name="subject" value="Einladung zum LoKo Mumble am 03.<?php if(date("m")+1<10){echo"0";}?><?php echo date("m")+1; ?>.<?php echo date("Y"); ?> um 21:00 Uhr"><br>
         <textarea class="form-control" rows="20" name="text">
-Ohai,
+Hallo %name%,
 
-am 03.<?php if(date("m")+1<10){echo"0";}?><?php echo date("m")+1; ?>.<?php echo date("Y"); ?> um 21:00 findet das nächste LoKo Mumble statt. Du bist als Ansprechpartner für eine Gruppe bei uns hinterlegt. Damit hast du auch die Aufgabe, in deiner Gruppe einen Verantwortlichen für das Lokalkoordinations-Mumbles zu finden, der an dem Mumbletreffen teilnimmt.  Wichtig ist, dass aus deiner Gruppe mindestens ein Vertreter an dem Treffen teilnimmt.
+am 03.<?php if(date("m")+1<10){echo"0";}?><?php echo date("m")+1; ?>.<?php echo date("Y"); ?> um 21:00 findet das nächste LoKo Mumble statt. Du bist als Ansprechpartner für die Gruppe %group% bei uns hinterlegt. Damit hast du auch die Aufgabe, in deiner Gruppe einen Verantwortlichen für das Lokalkoordinations-Mumbles zu finden, der an dem Mumbletreffen teilnimmt.  Wichtig ist, dass aus deiner Gruppe mindestens ein Vertreter an dem Treffen teilnimmt.
 
 Wenn ihr an dem Termin verhindert seid, schreibt doch bitte kurz in das Protokoll-Pad unter http://pad.junge-piraten.de/loko-<?php echo date("Y"); ?>-<?php if(date("m")+1<10){echo"0";}?><?php echo date("m")+1; ?>-03 was ihr gemacht habt. Bitte achtet darauf, das die Angaben auch für Außenstehende verständlich sind ;)
 
