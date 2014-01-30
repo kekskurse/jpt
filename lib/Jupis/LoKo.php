@@ -58,7 +58,7 @@ class LoKo
 			$list = $this->nntp->listGroups();
 			foreach($list as $entry)
 			{
-				if($entry[0]=="pirates.youth.de.announce"||substr($entry[0],0,24)=="pirates.youth.de.region.")
+				if($entry[0]=="pirates.youth.de.announce"||$entry[0]=="pirates.youth.de.orga.loko"||substr($entry[0],0,24)=="pirates.youth.de.region.")
 				{
 					$this->nntp->post($entry[0], $subject, $text, "loko@junge-piraten.de", array());
 					$send[]=$entry[0];
