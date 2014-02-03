@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "5a60d66eccd676463f8649cf879fde67",
+    "hash": "ccd89ee477b68bb67ba0b6d9db627d1c",
     "packages": [
         {
             "name": "dg/twitter-php",
@@ -81,12 +81,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "6767b0f21bd24d9ca7e0efcde640705772dedcbf"
+                "reference": "01f4c43b683d994e461d4e5049e88d8c5daff31d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/6767b0f21bd24d9ca7e0efcde640705772dedcbf",
-                "reference": "6767b0f21bd24d9ca7e0efcde640705772dedcbf",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/01f4c43b683d994e461d4e5049e88d8c5daff31d",
+                "reference": "01f4c43b683d994e461d4e5049e88d8c5daff31d",
                 "shasum": ""
             },
             "require": {
@@ -126,7 +126,40 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2013-12-30 21:37:28"
+            "time": "2014-01-22 14:53:13"
+        },
+        {
+            "name": "shuber/curl",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hamstar/curl.git",
+                "reference": "6624992df201f9fd7262080117385dd09b0ecd2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hamstar/curl/zipball/6624992df201f9fd7262080117385dd09b0ecd2b",
+                "reference": "6624992df201f9fd7262080117385dd09b0ecd2b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "curl.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP Wrapper for Curl",
+            "keywords": [
+                "bot",
+                "curl",
+                "scraper",
+                "spider"
+            ],
+            "time": "2013-11-23 01:44:31"
         },
         {
             "name": "slim/slim",
@@ -175,17 +208,56 @@
             "time": "2013-11-29 20:33:36"
         },
         {
+            "name": "sspssp/mediawikiapi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sspssp/phpMediaWiki.git",
+                "reference": "c3d84f33f29679335753af7d1a147fbba9868950"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sspssp/phpMediaWiki/zipball/c3d84f33f29679335753af7d1a147fbba9868950",
+                "reference": "c3d84f33f29679335753af7d1a147fbba9868950",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "shuber/curl": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SSP\\MediaWiki\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kruemel",
+                    "email": "kruemel@schredder.pw"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/sspssp/phpMediaWiki/tree/master",
+                "issues": "https://github.com/sspssp/phpMediaWiki/issues"
+            },
+            "time": "2014-01-24 13:50:43"
+        },
+        {
             "name": "sspssp/nntp",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sspssp/phpNNTP.git",
-                "reference": "99497be3d00410075cab020949fe1f0eaedb0342"
+                "reference": "03ca83db1583a40890a5df22640cf811f574ad89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sspssp/phpNNTP/zipball/99497be3d00410075cab020949fe1f0eaedb0342",
-                "reference": "99497be3d00410075cab020949fe1f0eaedb0342",
+                "url": "https://api.github.com/repos/sspssp/phpNNTP/zipball/03ca83db1583a40890a5df22640cf811f574ad89",
+                "reference": "03ca83db1583a40890a5df22640cf811f574ad89",
                 "shasum": ""
             },
             "require": {
@@ -207,7 +279,8 @@
                     "email": "kruemel@schredder.pw"
                 }
             ],
-            "time": "2014-01-21 09:48:28"
+            "description": "PHP class to read and write NNTP Posts",
+            "time": "2014-01-22 10:45:48"
         },
         {
             "name": "twitter/bootstrap",
@@ -261,9 +334,11 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "sspssp/nntp": 20,
+        "sspssp/mediawikiapi": 20,
         "easylib/pdow": 20,
         "phpmailer/phpmailer": 20,
-        "dg/twitter-php": 20
+        "dg/twitter-php": 20,
+        "shuber/curl": 20
     },
     "platform": [
 

@@ -24,7 +24,7 @@ $text .= '{| class="wikitable sortable" style="width:100%"
 ';
 foreach($groups as $group)
 {
-	$bemerkung = "''Keine''";
+	$bemerkung = null;
 	if($group["aktiv"]==1)
 	{
 		$people = $loko->searchPeople("group:".$group["id"]);
@@ -32,6 +32,14 @@ foreach($groups as $group)
 		{
 			$bemerkung = "'''Keine Ansprechpartner, bitte an loko@junge-piraten.de wenden!'''";
 		}
+		if($group["mail"]=="")
+		{
+			$bemerkung .= "\r\nFür diese Gruppe gibt es keine Allgemeine Kontakt E-Mail adresse!";
+		}
+	}
+	if($bemerkung==null)
+	{
+		$bemerkung = "''Keine''";
 	}
 	$aktiv="Nein";
 	if($group["aktiv"])

@@ -6,8 +6,12 @@ $app->post("/login", function() use ($app, $pdo) {
 	/* CHECK NNTP CONNECTION */
 	$nntp = new SSP\NNTP\NNTP();
 	$nntp->connect("news.junge-piraten.de"); //Return true or false
-	$res = $pdo->query("SELECT `username` FROM `access` WHERE `username` = ?", array($app->request->params('user')));
+	$res = $pdo->query("SELECT * FROM `access` WHERE `username` = ?", array($app->request->params('user')));
 	if(count($res)==0)
+	{
+		$app->render('login.php', array("login"=>false));
+	}
+	elseif(count($res)>1)
 	{
 		$app->render('login.php', array("login"=>false));
 	}
@@ -16,9 +20,12 @@ $app->post("/login", function() use ($app, $pdo) {
 		$login = $nntp->autentifizierung($app->request->params('user'), $app->request->params('pass')); //Return true or false
 		if($login)
 		{
+			#var_dump($res);exit();
 			$_SESSION["login"]=true;
 			$_SESSION["username"]=$app->request->params('user');
 			$_SESSION["pw"]=$app->request->params('pass');
+			$_SESSION["loko"]=$res[0]["loko"];
+			$_SESSION["zeitung"]=$res[0]["zeitung"];
 			$app->redirect('/');
 		}
 		$app->render('login.php', array("login"=>$login));

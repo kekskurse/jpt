@@ -27,6 +27,7 @@
     <![endif]-->
     
     <script src="/js/jquery-2.0.3.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
     <script src="/bootstrap/js/bootstrap.js"></script>
   </head>
 
@@ -44,6 +45,15 @@
       <li><a href="/loko/invite/person">Persöhnliche Einladungen</a></li>
       <li><a href="/loko/contact">Ansprechpartner</a></li>
       <li><a href="/loko/groups">Gruppen</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      Zeitung
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="/zeitung/contact">Ansprechpartner</a></li>
+      <li><a href="/zeitung/topics">Themenliste</a></li>
     </ul>
   </li>
   <li class="dropdown">

@@ -22,7 +22,15 @@ $app->add(new \AllCapsMiddleware());
 
 require "../controller/test.php";
 require "../controller/public.php";
-require "../controller/loko.php";
+#$_SESSION["loko"]=1;
+if(isset($_SESSION["loko"])&&$_SESSION["loko"])
+{
+	require "../controller/loko.php";
+}
+if(isset($_SESSION["zeitung"])&&$_SESSION["zeitung"])
+{
+	require "../controller/zeitung.php";
+}
 require "../controller/lists.php";
 
 $app->run();

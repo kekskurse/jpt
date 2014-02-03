@@ -13,7 +13,7 @@
       </table>
     <script>
       $("#q").keyup(function() {
-          $("#groups tr").remove();
+          $("#groups tr").remove3();
            $.getJSON("/lists/list/structur?id=<?php echo $id; ?>", function (data) {
             var head = "<tr>";
             $.each( data, function( key, val ) {
