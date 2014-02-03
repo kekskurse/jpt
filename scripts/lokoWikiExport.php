@@ -1,11 +1,11 @@
 <?php
 //Run this Script on time per Day!
-require '../vendor/autoload.php';
-require '../config/config.php';
+require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../config/config.php';
 
 $mediaWiki = new SSP\MediaWiki\MediaWikiConnect();
 $mediaWiki->setAPIUrl("https://wiki.junge-piraten.de/w/api.php");
-$mediaWiki->setLoginData("sspssp", "gelnhausen");
+$mediaWiki->setLoginData($mediawiki["user"], $mediawiki["pw"]);
 $mediaWiki->login();
 
 $pdo = new Easy\PDOW\PDOW();
@@ -24,22 +24,34 @@ $text .= '{| class="wikitable sortable" style="width:100%"
 ';
 foreach($groups as $group)
 {
-	$bemerkung = null;
+	$b = array();
+	$bemerkung = "";
 	if($group["aktiv"]==1)
 	{
 		$people = $loko->searchPeople("group:".$group["id"]);
 		if(count($people)==0)
 		{
-			$bemerkung = "'''Keine Ansprechpartner, bitte an loko@junge-piraten.de wenden!'''";
+			$b[] = "'''Kein*e [[Loko/Ansprechpartner|Ansprechpartner*in]], bitte an loko@junge-piraten.de wenden!'''";
 		}
 		if($group["mail"]=="")
 		{
-			$bemerkung .= "\r\nFür diese Gruppe gibt es keine Allgemeine Kontakt E-Mail adresse!";
+			$b[] = "Keine Gruppen E-Mail adresse.";
 		}
 	}
-	if($bemerkung==null)
+	if(count($b)==0)
 	{
 		$bemerkung = "''Keine''";
+	}
+	else
+	{
+		for($i=0;$i<count($b);$i++)
+		{
+			if($i!=0)
+			{
+				$bemerkung.="\r\n";
+			}
+			$bemerkung.=$b[$i];
+		}
 	}
 	$aktiv="Nein";
 	if($group["aktiv"])

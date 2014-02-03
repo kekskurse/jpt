@@ -58,7 +58,7 @@ class LoKo
 			$list = $this->nntp->listGroups();
 			foreach($list as $entry)
 			{
-				if($entry[0]=="pirates.youth.de.announce"||substr($entry[0],0,24)=="pirates.youth.de.region.")
+				if($entry[0]=="pirates.youth.de.announce"||$entry[0]=="pirates.youth.de.orga.loko"||substr($entry[0],0,24)=="pirates.youth.de.region.")
 				{
 					$this->nntp->post($entry[0], $subject, $text, "loko@junge-piraten.de", array());
 					$send[]=$entry[0];
@@ -95,6 +95,38 @@ class LoKo
 			}
 		}
 		return $send;
+	}
+	public function sendMail($subject, $text, $to, $peopleID=0, $test = true, $testTo)
+	{
+		if($peopleID!=0)
+		{
+			$detais = $this->getPeople($peopleID);
+			$text = str_replace("%name%", $detais["name"], $text);
+			$text = str_replace("%group%", $detais["groupName"], $text);
+		}
+		$text = mb_convert_encoding($text, "ISO-8859-1", "UTF-8");
+		$this->mail->From = 'loko@junge-piraten.de';
+		$this->mail->FromName = 'LoKo Derps';
+		$this->mail->Subject = $subject;
+		$this->mail->Body    = $text;
+		$this->mail->isHTML(false);
+		if($test)
+		{
+			#echo mb_detect_encoding($text);
+			$this->mail->addAddress($testTo);  // Add a recipient
+			$send[] = $testTo;
+			$this->mail->send();
+			return $testTo;
+		}
+		else
+		{
+			$this->mail->clearAddresses();
+			$this->mail->addAddress($to);
+			$send[]=$to;
+			$this->mail->send();
+		}
+		return $to;
+
 	}
 	public function createGroup($name, $mail, $more, $aktiv, $typ, $bundesland, $wiki)
 	{

@@ -58,11 +58,17 @@ $app->post("/loko/invite/person", function() use($app, $pdo)
 	$loko->setSMTPData(SMTPUSER, SMTPPASS);
 	$mails = array();
 	$list = $loko->listPeople();
+	$send = array();
 	foreach($list as $l)
 	{
-		$mails[] = $l["mail"];
+		#$mails[] = $l["mail"];
+		$send[] = $loko->sendMail($app->request->params('subject'),  $app->request->params('text'), $l["mail"], $l["id"], $test, $_SESSION["username"]."@community.junge-piraten.de");
+		if($test)
+		{
+			break;
+		}
 	}
-	$send = $loko->invitePeople($app->request->params('subject'), $app->request->params('text'), $mails, $test, $_SESSION["username"]."@community.junge-piraten.de");
+	#$send = $loko->invitePeople($app->request->params('subject'), $app->request->params('text'), $mails, $test, $_SESSION["username"]."@community.junge-piraten.de");
 	$app->render('smtpSend.php', array("send"=>$send, "next"=>"/loko/invite/person"));
 });
 
