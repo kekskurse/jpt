@@ -3,9 +3,12 @@ namespace Jupis;
 class Listen
 {
 	private $pdo = NULL;
+	private $log = null;
 	public function setPDO($pdo)
 	{
 		$this->pdo = $pdo;
+		$this->log = new Log();
+		$this->log->setPDO($pdo);
 	}
 	public function createList($name)
 	{

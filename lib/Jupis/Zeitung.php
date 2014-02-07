@@ -4,9 +4,12 @@ namespace Jupis;
 class Zeitung
 {
 	private $pdo = NULL;
+	private $log = NULL;
 	public function setPDO($pdo)
 	{
 		$this->pdo = $pdo;
+		$this->log = new Log();
+		$this->log->setPDO($pdo);
 	}
 	public function listePeople()
 	{
@@ -75,17 +78,24 @@ class Zeitung
 	public function addPeople($name, $mail, $topics, $more)
 	{
 		$sql = "INSERT INTO `zeitung_people`(`name`, `mail`, `topics`, `more`) VALUES (?, ?, ?, ?)";
-		$res = $this->pdo->insertID($sql, array($name,$mail,$topics,$more));
+		$param = array($name,$mail,$topics,$more);
+		$res = $this->pdo->insertID($sql, $param);
+		$this->log->addLog("Zeitung People", "create", NULL, $res, $name, NULL, $this->log->var_dump($param));
 		return $res;
 	}
 	public function updatePeople($id, $name, $mail, $topics, $more)
 	{
+		$oldValue = $this->getPeople($id);
 		$sql = "UPDATE `zeitung_people` SET `name`=?,`mail`=?,`topics`=?,`more`=? WHERE id = ?";
-		$this->pdo->insert($sql, array($name, $mail, $topics, $more, $id));
+		$param = array($name, $mail, $topics, $more, $id);
+		$this->pdo->insert($sql, $param);
+		$this->log->addLog("Zeitung People", "edit", NULL, $id, $name, $this->log->var_dump($oldValue), $this->log->var_dump($param));
 	}
 		public function delPeople($id)
 	{
+		$oldValue = $this->getPeople($id);
 		$sql = "DELETE FROM `zeitung_people` WHERE id = ?";
 		$this->pdo->insert($sql, array($id));
+		$this->log->addLog("Zeitung People", "remove", NULL, $id, $oldValue["name"], $this->log->var_dump($oldValue), NULL);
 	}
 }

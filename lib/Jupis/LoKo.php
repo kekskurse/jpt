@@ -4,9 +4,12 @@ namespace Jupis;
 class LoKo
 {
 	private $pdo = NULL;
+	private $log = NULL;
 	public function setPDO($pdo)
 	{
 		$this->pdo = $pdo;
+		$this->log = new Log();
+		$this->log->setPDO($pdo);
 	}
 	public function getLoKoPeople()
 	{
@@ -18,12 +21,14 @@ class LoKo
 	{
 		$sql = "INSERT INTO `lokomenschen`(`twitter`) VALUES (?)";
 		$res = $this->pdo->insertID($sql, array($name));
+		$this->log->addLog("LoKoPeople", "create", NULL, $res, $name, NULL, $name);
 		return $res;
 	}
 	public function rmLoKoPeople($name)
 	{
 		$sql = "DELETE FROM `lokomenschen` WHERE twitter = ?";
 		$this->pdo->insert($sql, array($name));
+		$this->log->addLog("LoKoPeople", "remove", NULL, NULL, $name, $name, NULL);
 		return true;
 	}
 	public function setNNTPData($user, $pw)
@@ -50,8 +55,9 @@ class LoKo
 		$send = array();
 		if($test)
 		{
-			$this->nntp->post("pirates.youth.de.test", $subject, $text, "loko@junge-piraten.de", array()); //Return true or false
+			$res = $this->nntp->post("pirates.youth.de.test", $subject, $text, "loko@junge-piraten.de", array()); //Return true or false
 			$send[]="pirates.youth.de.test";
+			$this->log->addLog("LoKo", "nntp", NULL, NULL, "invite pirates.youth.de.test", NULL, $res);
 		}
 		else
 		{
@@ -60,7 +66,8 @@ class LoKo
 			{
 				if($entry[0]=="pirates.youth.de.announce"||$entry[0]=="pirates.youth.de.orga.loko"||substr($entry[0],0,24)=="pirates.youth.de.region.")
 				{
-					$this->nntp->post($entry[0], $subject, $text, "loko@junge-piraten.de", array());
+					$res = $this->nntp->post($entry[0], $subject, $text, "loko@junge-piraten.de", array());
+					$this->log->addLog("LoKo", "nntp", NULL, NULL, "invite $entry[0]", NULL, $res);
 					$send[]=$entry[0];
 				}
 			}
@@ -83,6 +90,7 @@ class LoKo
 			$this->mail->addAddress($testTo);  // Add a recipient
 			$send[] = $testTo;
 			$this->mail->send();
+			$this->log->addLog("LoKo", "mail", NULL, NULL, "invite ".$testTo, NULL, NULL);
 		}
 		else
 		{
@@ -92,6 +100,7 @@ class LoKo
 				$this->mail->addAddress($mail);
 				$send[]=$mail;
 				$this->mail->send();
+				$this->log->addLog("LoKo", "mail", NULL, NULL, "invite ".$mail, NULL, NULL);
 			}
 		}
 		return $send;
@@ -125,6 +134,7 @@ class LoKo
 			$send[]=$to;
 			$this->mail->send();
 		}
+		$this->log->addLog("LoKo", "mail", NULL, NULL, "sendMail ", NULL, $this->log->var_dump($send));
 		return $to;
 
 	}
@@ -132,17 +142,23 @@ class LoKo
 	{
 		#var_dump($wiki);exit();
 		$sql = "INSERT INTO `lokogruppen`(`name`, `mail`, `more`, `aktiv`, `typ`, `bundesland`, `wiki`) VALUES (?, ?, ? , ?, ?, ?, ?)";
-		$id = $this->pdo->insertID($sql, array($name, $mail, $more, $aktiv, $typ, $bundesland, $wiki));
+		$param = array($name, $mail, $more, $aktiv, $typ, $bundesland, $wiki);
+		$id = $this->pdo->insertID($sql, $param);
+		$this->log->addLog("LoKo Group", "create", NULL, $id, $name, NULL, $this->log->var_dump($param));
 	}
 	public function updateGroup($id, $name, $mail, $more, $aktiv, $typ, $bundesland, $wiki)
 	{
+		$oldValue = $this->getGroups($id);
 		$sql = "UPDATE `lokogruppen` SET `name`=?,`mail`=?,`more`=?, `aktiv` = ?, `bundesland` = ?, `typ` = ?, `wiki`= ? WHERE id = ?";
 		$this->pdo->insert($sql, array($name, $mail, $more,$aktiv,$bundesland, $typ, $wiki, $id));
+		$this->log->addLog("LoKo Group", "edit", NULL, $id, $name, $this->log->var_dump($oldValue), $this->log->var_dump($param));
 	}
 	public function delGroup($id)
 	{
+		$oldValue = $this->getGroups($id);
 		$sql = "DELETE FROM `lokogruppen` WHERE id = ?";
 		$this->pdo->insert($sql, array($id));
+		$this->log->addLog("LoKo Group", "edit", NULL, $id, $name, $this->log->var_dump($oldValue), NULL);
 	}
 	public function listGroups($aktiv = 1)
 	{
@@ -189,13 +205,18 @@ class LoKo
 	public function addPeople($name, $mail, $groupID, $more)
 	{
 		$sql = "INSERT INTO `lokopeople`(`name`, `mail`, `group`, `more`) VALUES (?, ?, ?, ?)";
-		$res = $this->pdo->insertID($sql, array($name,$mail,$groupID,$more));
+		$param = array($name,$mail,$groupID,$more);
+		$res = $this->pdo->insertID($sql, $param);
+		$this->log->addLog("LoKo People", "create", NULL, $res, $name, NULL, $this->log->var_dump($param));
 		return $res;
 	}
 	public function updatePeople($id, $name, $mail, $groupID, $more)
 	{
+		$oldValue = $this->getPeople($id);
 		$sql = "UPDATE `lokopeople` SET `name`=?,`mail`=?,`group`=?,`more`=? WHERE id = ?";
-		$this->pdo->insert($sql, array($name, $mail, $groupID, $more, $id));
+		$param = array($name, $mail, $groupID, $more, $id);
+		$this->pdo->insert($sql, $param);
+		$this->log->addLog("LoKo People", "edit", NULL, $id, $name, $this->log->var_dump($oldValue), $this->log->var_dump($param));
 	}
 	public function listPeople()
 	{
@@ -211,8 +232,10 @@ class LoKo
 	}
 	public function delPeople($id)
 	{
+		$oldValue = $this->getPeople($id);
 		$sql = "DELETE FROM `lokopeople` WHERE id = ?";
 		$this->pdo->insert($sql, array($id));
+		$this->log->addLog("LoKo People", "remove", NULL, $id, $oldValue["name"], $this->log->var_dump($oldValue), NULL);
 	}
 	public function searchPeople($searchstring)
 	{

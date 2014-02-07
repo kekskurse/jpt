@@ -30,6 +30,7 @@ $app->get("/loko/invite", function() use ($app, $pdo) {
 });
 $app->post("/loko/invite", function() use ($app, $pdo) {
 	$loko = new Jupis\LoKo();
+	$loko->setPDO($pdo);
 	$loko->setNNTPData($_SESSION["username"], $_SESSION["pw"]);
 	$test = true;
 	if($app->request->params('test')==null)

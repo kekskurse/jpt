@@ -4,7 +4,8 @@
 jQuery.curCSS = jQuery.css;
 </script>
 <link href="/css/jquery.tagsinput.css" rel="stylesheet" type="text/css">
-<script type='text/javascript' src='/js/jquery-ui.min.js'></script>
+<script type='text/javascript' src='/js/jquery-ui.min.
+js'></script>
 <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
 <style type="text/css">
 .ui-autocomplete

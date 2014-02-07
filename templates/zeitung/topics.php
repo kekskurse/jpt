@@ -9,7 +9,7 @@
         <?php
         foreach($topics as $t)
         {
-          echo "<li> <a href='/zeitung/contact?q=".$t."'>".$t."</a></li>";
+          echo "<li> <a href='/zeitung/contact?q=".$t."'0>".$t."</a></li>";
         }
         ?>
       </ul>
