@@ -220,7 +220,7 @@ class LoKo
 	}
 	public function listPeople($lokoAnsprechparnter = false, $aktiv = false)
 	{
-		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group`";
+		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group`";
 		if($lokoAnsprechparnter){
 			$sql .= " WHERE lokoAnsprechpartner = 1";
 		}
@@ -237,7 +237,7 @@ class LoKo
 	}
 	public function getPeople($id)
 	{
-		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE `lokopeople`.`id` = ?";
+		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE `lokopeople`.`id` = ?";
 		$res = $this->pdo->query($sql, array($id));
 		return $res[0];
 	}
