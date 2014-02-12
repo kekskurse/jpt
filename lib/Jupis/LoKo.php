@@ -255,7 +255,7 @@ class LoKo
 		#var_dump($res);
 		if($searchstring=="")
 		{
-			return $this->listPeople(true, true);
+			return $this->listPeople(false, true);
 		}
 		$res = $this->listPeople();
 		$tmp = array();

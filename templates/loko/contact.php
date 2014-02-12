@@ -22,11 +22,16 @@
       <script>
       $("#q").keyup(function() {
           $("#groups tr").remove();
-          $('#groups').append("<tr><th>Name</th><th>Gruppe</th><th>E-Mail Adresse</th><th>Weiteres</th><th>Aktionen</th></tr>");
+          $('#groups').append("<tr><th>Name</th><th>Gruppe</th><th>E-Mail Adresse</th><th>Weiteres</th><th>Tags</th><th>Aktionen</th></tr>");
           $.getJSON( "/loko/contact/search?q="+$("#q").val(), function( data ) {
             $.each( data, function( key, val ) {
               //$('#groups').append("<tr><td>"+val["name"]+"</td><td>"+val["mail"]+"</td><td>"+val["bundesland"]+"</td><td>"+val["aktiv"]+"</td><td>"+val["more"]+"</td><td><a href='/loko/groups/edit?id="+val["id"]+"'><i class='fa fa-pencil'></i></a>&nbsp;<a href='/loko/groups/del?id="+val["id"]+"'><i class='fa fa-minus-circle'></i></a>&nbsp;<a href='/loko/groups/detais?id="+val["id"]+"'><i class='fa fa-eye'></i></a>&nbsp<a href='https://wiki.junge-piraten.de/wiki/"+val["wiki"]+"' target='_blank'>[WIKI]</a></td></tr>");
-              $('#groups').append("<tr><td>"+val["name"]+"</td><td>"+val["groupName"]+"</td><td>"+val["mail"]+"</td><td>"+val["more"]+"</td><td><a href='/loko/contact/edit?id="+val["id"]+"'><i class='fa fa-pencil'></i></a>&nbsp;<a href='/loko/contact/del?id="+val["id"]+"'><i class='fa fa-minus-circle'></i></a></td></tr>");
+              var zeile = "<tr><td>"+val["name"]+"</td><td>"+val["groupName"]+"</td><td>"+val["mail"]+"</td><td>"+val["more"]+"</td><td>";
+	//<span class="label label-info">Info</span>
+		if(val["aktiv"]==0){  zeile += '<span class="label label-danger">Inaktiv</span>'; }
+		if(val["lokoAnsprechpartner"]==1){ zeile += '<span class="label label-info">LoKo Ansprechpartner</span>' }
+	      zeile += "</td><td><a href='/loko/contact/edit?id="+val["id"]+"'><i class='fa fa-pencil'></i></a>&nbsp;<a href='/loko/contact/del?id="+val["id"]+"'><i class='fa fa-minus-circle'></i></a></td></tr>";
+		$('#groups').append(zeile);
               console.log(val);
             });
           });
