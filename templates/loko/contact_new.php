@@ -27,6 +27,8 @@
             </select>
       	<b>Weiteres:</b><br>
       	<textarea class="form-control" name="more" rows="10"><?php echo $more; ?></textarea><br>
+	<input type="checkbox" name="lokoAnsprechpartner" <?php if($lokoAnsprechpartner){ echo "checked"; } ?>>Loko Ansprechpartner<br>
+	<input type="checkbox" name="aktiv" <?php if($aktiv){ echo "checked"; } ?>>Aktiv<br>
       	<input type="submit" class="btn btn-default" value="Speichern">
       </form>
       

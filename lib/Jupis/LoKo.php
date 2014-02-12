@@ -202,31 +202,42 @@ class LoKo
 		$res = $this->pdo->query($sql, array($id));
 		return $res[0];
 	}
-	public function addPeople($name, $mail, $groupID, $more)
+	public function addPeople($name, $mail, $groupID, $more, $aktiv, $lokoAnsprechpartner)
 	{
-		$sql = "INSERT INTO `lokopeople`(`name`, `mail`, `group`, `more`) VALUES (?, ?, ?, ?)";
-		$param = array($name,$mail,$groupID,$more);
+		$sql = "INSERT INTO `lokopeople`(`name`, `mail`, `group`, `more`, `aktiv`, `lokoAnsprechpartner`) VALUES (?, ?, ?, ?, ?, ?)";
+		$param = array($name,$mail,$groupID,$more, $aktiv, $lokoAnsprechpartner);
 		$res = $this->pdo->insertID($sql, $param);
 		$this->log->addLog("LoKo People", "create", NULL, $res, $name, NULL, $this->log->var_dump($param));
 		return $res;
 	}
-	public function updatePeople($id, $name, $mail, $groupID, $more)
+	public function updatePeople($id, $name, $mail, $groupID, $more, $aktiv, $lokoAnsprechpartner)
 	{
 		$oldValue = $this->getPeople($id);
-		$sql = "UPDATE `lokopeople` SET `name`=?,`mail`=?,`group`=?,`more`=? WHERE id = ?";
-		$param = array($name, $mail, $groupID, $more, $id);
+		$sql = "UPDATE `lokopeople` SET `name`=?,`mail`=?,`group`=?,`more`=?, `aktiv`=?, `lokoAnsprechpartner`=? WHERE id = ?";
+		$param = array($name, $mail, $groupID, $more, $aktiv, $lokoAnsprechpartner, $id);
 		$this->pdo->insert($sql, $param);
 		$this->log->addLog("LoKo People", "edit", NULL, $id, $name, $this->log->var_dump($oldValue), $this->log->var_dump($param));
 	}
-	public function listPeople()
+	public function listPeople($lokoAnsprechparnter = false, $aktiv = false)
 	{
-		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group`";
+		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group`";
+		if($lokoAnsprechparnter){
+			$sql .= " WHERE lokoAnsprechpartner = 1";
+		}
+		if($aktiv&&$lokoAnsprechparnter)
+		{
+			$sql .= " AND `lokopeople`.`aktiv` = 1";
+		}
+		elseif($aktiv)
+		{
+			$sql .= " WHERE `lokopeople`.`aktiv` = 1";
+		}
 		$res = $this->pdo->query($sql, array());
 		return $res;
 	}
 	public function getPeople($id)
 	{
-		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE `lokopeople`.`id` = ?";
+		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE `lokopeople`.`id` = ?";
 		$res = $this->pdo->query($sql, array($id));
 		return $res[0];
 	}
@@ -244,7 +255,7 @@ class LoKo
 		#var_dump($res);
 		if($searchstring=="")
 		{
-			return $this->listPeople();
+			return $this->listPeople(true, true);
 		}
 		$res = $this->listPeople();
 		$tmp = array();

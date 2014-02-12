@@ -58,7 +58,7 @@ $app->post("/loko/invite/person", function() use($app, $pdo)
 	$loko->setPDO($pdo);
 	$loko->setSMTPData(SMTPUSER, SMTPPASS);
 	$mails = array();
-	$list = $loko->listPeople();
+	$list = $loko->listPeople(true, true);
 	$send = array();
 	foreach($list as $l)
 	{
@@ -86,13 +86,23 @@ $app->get("/loko/contact/edit", function() use($app, $pdo)
 	$loko->setPDO($pdo);
 	$groups = $loko->listGroups();
 	$person = $loko->getPeople($app->request->params('id'));
-	$app->render('loko/contact_new.php', array("id"=>$person["id"], "name"=>$person["name"], "mail"=>$person["mail"],"more"=>$person["more"], "group"=>$person["group"],"groups"=>$groups));
+	$app->render('loko/contact_new.php', array("id"=>$person["id"], "name"=>$person["name"], "mail"=>$person["mail"],"more"=>$person["more"], "group"=>$person["group"],"groups"=>$groups, "aktiv"=>$person["aktiv"], "lokoAnsprechpartner" => $person["lokoAnsprechpartner"]));
 });
 $app->post("/loko/contact/edit", function() use($app, $pdo)
 {
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
-	$loko->updatePeople($app->request->params('id'), $app->request->params('name'), $app->request->params('mail'), $app->request->params('group'), $app->request->params('more'));
+	$aktiv = 0;
+	if($app->request->params("aktiv")!=NULL)
+	{
+		$aktiv = 1;
+	}
+	$lokoAnsprechpartner = 0;
+	if($app->request->params("lokoAnsprechpartner")!=NULL)
+	{
+		$lokoAnsprechpartner = 1;
+	}
+	$loko->updatePeople($app->request->params('id'), $app->request->params('name'), $app->request->params('mail'), $app->request->params('group'), $app->request->params('more'), $aktiv, $lokoAnsprechpartner);
 	$app->redirect('/loko/contact');
 });
 $app->get("/loko/contact/new", function() use($app, $pdo)
@@ -100,7 +110,7 @@ $app->get("/loko/contact/new", function() use($app, $pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$groups = $loko->listGroups();
-	$app->render('loko/contact_new.php', array("id"=>"NEW", "name"=>"", "mail"=>"","more"=>"","groups"=>$groups, "group"=>""));
+	$app->render('loko/contact_new.php', array("id"=>"NEW", "name"=>"", "mail"=>"","more"=>"","groups"=>$groups, "group"=>"", "aktiv" => 1, "lokoAnsprechpartner"=>1));
 });
 $app->get("/loko/contact/del", function() use($app, $pdo)
 {
@@ -113,7 +123,17 @@ $app->post("/loko/contact/new", function() use($app, $pdo)
 {
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
-	$loko->addPeople($app->request->params('name'), $app->request->params('mail'), $app->request->params('group'), $app->request->params('more'));
+	$aktiv = 0;
+	if($app->request->params("aktiv")!=NULL)
+	{
+		$aktiv = 1;
+	}
+	$lokoAnsprechpartner = 0;
+	if($app->request->params("lokoAnsprechpartner")!=NULL)
+	{
+		$lokoAnsprechpartner = 1;
+	}
+	$loko->addPeople($app->request->params('name'), $app->request->params('mail'), $app->request->params('group'), $app->request->params('more'), $aktiv, $lokoAnsprechpartner);
 	$app->redirect('/loko/contact');
 });
 $app->get("/loko/contact/search", function() use($app, $pdo)
