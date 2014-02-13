@@ -31,7 +31,7 @@
 		if(val["aktiv"]==0){  zeile += '<span class="label label-danger">Inaktiv</span> '; }
 		if(val["lokoAnsprechpartner"]==1){ zeile += '<span class="label label-info">LoKo Ansprechpartner</span> ' }
 		if(val["nntpName"]!=null){  zeile += '<span class="label label-success">NNTP Account</span> '; }
-    if(val["verwalter"]!="bund"){ zeile += '<span class="label label-info">Verwlatet duch '+val["verwalter"]+'</span>'; }
+    if(val["verwalter"]!="bund"){ zeile += '<span class="label label-info">Verwaltet duch '+val["verwalter"]+'</span>'; }
 	      zeile += "</td><td><a href='/loko/contact/edit?id="+val["id"]+"'><i class='fa fa-pencil'></i></a>&nbsp;<a href='/loko/contact/del?id="+val["id"]+"'><i class='fa fa-minus-circle'></i></a></td></tr>";
 		$('#groups').append(zeile);
               console.log(val);

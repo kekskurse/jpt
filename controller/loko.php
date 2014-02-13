@@ -217,7 +217,21 @@ $app->get("/loko/groups/search", function() use($app, $pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$list = $loko->searchGroups($app->request->params('q'));
-	echo json_encode($list);
+	$bundeslaender = $loko->getLoKoBundeslaender();
+	$tmp = array();
+	foreach($list as $l)
+	{
+		if(in_array($l["bundesland"],$bundeslaender))
+		{
+			$l["verwalter"]=$l["bundesland"];
+		}
+		else
+		{
+			$l["verwalter"]="bund";
+		}
+		$tmp[] = $l;
+	}
+	echo json_encode($tmp);
 });
 $app->get("/loko/groups/detais", function() use($app, $pdo)
 {
