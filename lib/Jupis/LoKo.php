@@ -300,7 +300,7 @@ class LoKo
 	}
 	public function getPeople($id)
 	{
-		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`bundesland`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE `lokopeople`.`id` = ?";
+		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokogruppen`.`bundesland`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE `lokopeople`.`id` = ?";
 		$res = $this->pdo->query($sql, array($id));
 		if($_SESSION["bundesland"]!=null)
 		{
