@@ -141,6 +141,19 @@ $app->get("/loko/contact/search", function() use($app, $pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$list = $loko->searchPeople($app->request->params('q'));
+	$bundeslaender = $loko->getLoKoBundeslaender();
+	$tmp = array();
+	foreach($list as $l)
+	{
+		if(in_array($l["bundesland"],$bundeslaender))
+		{
+			$l["verwalter"]=$l["bundesland"];
+		}
+		else
+		{
+			$l["verwalter"]="bund";
+		}
+	}
 	echo json_encode($list);
 });
 /*GROUPS */

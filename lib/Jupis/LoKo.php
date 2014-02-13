@@ -281,7 +281,7 @@ class LoKo
 	}
 	public function listPeople($lokoAnsprechparnter = false, $aktiv = false)
 	{
-		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE 1 ";
+		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`bundesland`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE 1 ";
 		$param = array();
 		if($lokoAnsprechparnter){
 			$sql .= " AND lokoAnsprechpartner = 1";
@@ -343,6 +343,20 @@ class LoKo
 			if($searchstring=="group:".$r["group"])
 			{
 				$tmp[] = $r;
+			}
+		}
+		return $tmp;
+	}
+	public function getLoKoBundeslaender()
+	{
+		$sql = "SELECT `bundesland` FROM `access` GROUP BY `bundesland`";
+		$res = $this->pdo->query($sql);
+		$tmp = array();
+		foreach($res as $r)
+		{
+			if($r["bundesland"]!=null)
+			{
+				$tmp[]=$r["bundesland"];
 			}
 		}
 		return $tmp;
