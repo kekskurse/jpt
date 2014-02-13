@@ -33,7 +33,7 @@ foreach($bundeslaender as $bundesland)
 	{
 		if($group["aktiv"]==1)
 		{
-			$text.= '* [['.$group["wiki"].'|'.$group["groupName"].']]\r\n';
+			$text.= '* [['.$group["wiki"].'|'.$group["groupName"].']]'."\r\n";
 		}
 		$mediaWiki->setPageText("Vorlage:JPT/GroupBundesland/".$bundesland, $text);
 		
