@@ -41,6 +41,6 @@ $app->get("/public/api/groups.json", function () use($pdo)
 {
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
-	$groups = $loko->getGroups();
+	$groups = $loko->listGroups();
 	echo json_encode($groups);
 });
