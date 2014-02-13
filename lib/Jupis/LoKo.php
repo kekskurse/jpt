@@ -187,7 +187,8 @@ class LoKo
 		}
 		$oldValue = $this->getGroups($id);
 		$sql = "UPDATE `lokogruppen` SET `name`=?,`mail`=?,`more`=?, `aktiv` = ?, `bundesland` = ?, `typ` = ?, `wiki`= ? WHERE id = ?";
-		$this->pdo->insert($sql, array($name, $mail, $more,$aktiv,$bundesland, $typ, $wiki, $id));
+		$param = array($name, $mail, $more,$aktiv,$bundesland, $typ, $wiki, $id);
+		$this->pdo->insert($sql, $param);
 		$this->log->addLog("LoKo Group", "edit", NULL, $id, $name, $this->log->var_dump($oldValue), $this->log->var_dump($param));
 	}
 	public function delGroup($id)
