@@ -181,7 +181,7 @@ class LoKo
 	}
 	public function updateGroup($id, $name, $mail, $more, $aktiv, $typ, $bundesland, $wiki)
 	{
-		if($_SESSION["bundesland"]!=$bundesland)
+		if(!($_SESSION["bundesland"]==null||$_SESSION["bundesland"]==$bundesland))
 		{
 			return false;
 		}
