@@ -1,4 +1,6 @@
 <?php
+session_start();
+$_SESSION["bundesland"]=null;
 //Run this Script on time per Day!
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/../config/config.php';
