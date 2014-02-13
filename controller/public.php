@@ -25,6 +25,7 @@ $app->post("/login", function() use ($app, $pdo) {
 			$_SESSION["username"]=$app->request->params('user');
 			$_SESSION["pw"]=$app->request->params('pass');
 			$_SESSION["loko"]=$res[0]["loko"];
+			$_SESSION["bundesland"]=$res[0]["bundesland"];
 			$_SESSION["zeitung"]=$res[0]["zeitung"];
 			$app->redirect('/');
 		}

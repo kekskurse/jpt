@@ -162,12 +162,19 @@ class LoKo
 	}
 	public function listGroups($aktiv = 1)
 	{
-		$sql = 'SELECT `id`, `name` AS `groupName`, `mail`, `more`, `aktiv`, `bundesland`, `typ`, `wiki`, CONCAT(`typ`, " ", `name`) AS `name` FROM `lokogruppen`';
+		
+		$sql = 'SELECT `id`, `name` AS `groupName`, `mail`, `more`, `aktiv`, `bundesland`, `typ`, `wiki`, CONCAT(`typ`, " ", `name`) AS `name` FROM `lokogruppen` WHERE 1 ';
+		$param = array();
 		if($aktiv==1)
 		{
-			$sql .= 'WHERE `aktiv` = 1';
+			$sql .= ' AND `aktiv` = 1';
 		}
-		$res = $this->pdo->query($sql, array());
+		if($_SESSION["bundesland"]!=null)
+		{
+			$sql .= " AND `bundesland` = ?";
+			$param[] = $_SESSION["bundesland"];
+		}
+		$res = $this->pdo->query($sql, $param);
 		return $res;
 	}
 	public function searchGroups($searchstring)
@@ -220,19 +227,21 @@ class LoKo
 	}
 	public function listPeople($lokoAnsprechparnter = false, $aktiv = false)
 	{
-		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group`";
+		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE 1 ";
+		$param = array();
 		if($lokoAnsprechparnter){
-			$sql .= " WHERE lokoAnsprechpartner = 1";
+			$sql .= " AND lokoAnsprechpartner = 1";
 		}
-		if($aktiv&&$lokoAnsprechparnter)
+		if($aktiv)
 		{
 			$sql .= " AND `lokopeople`.`aktiv` = 1";
 		}
-		elseif($aktiv)
+		if($_SESSION["bundesland"]!=null)
 		{
-			$sql .= " WHERE `lokopeople`.`aktiv` = 1";
+			$sql .= " AND `lokogruppen`.`bundesland` = ?";
+			$param[] = $_SESSION["bundesland"];
 		}
-		$res = $this->pdo->query($sql, array());
+		$res = $this->pdo->query($sql, $param);
 		return $res;
 	}
 	public function getPeople($id)
