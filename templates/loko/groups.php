@@ -21,7 +21,7 @@
               //val["aktiv"]
               if(val["aktiv"]==0){ zeile += '<span class="label label-danger">Inaktiv</span> '; }
               if(val["verwalter"]!="bund"){ zeile += '<span class="label label-info">Verwaltet duch '+val["verwalter"]+'</span>'; }
-              zeile += "</td><td>"+val["more"]+"</td><td><a href='/loko/groups/edit?id="+val["id"]+"'><i class='fa fa-pencil'></i></a>&nbsp;<a href='/loko/groups/del?id="+val["id"]+"'><i class='fa fa-minus-circle'></i></a>&nbsp;<a href='/loko/contact?q=group:"+val["id"]+"'><i class='fa fa-eye'></i></a>&nbsp<a href='https://wiki.junge-piraten.de/wiki/"+val["wiki"]+"' target='_blank'>[WIKI]</a></td></tr>");
+              zeile += "</td><td>"+val["more"]+"</td><td><a href='/loko/groups/edit?id="+val["id"]+"'><i class='fa fa-pencil'></i></a>&nbsp;<a href='/loko/groups/del?id="+val["id"]+"'><i class='fa fa-minus-circle'></i></a>&nbsp;<a href='/loko/contact?q=group:"+val["id"]+"'><i class='fa fa-eye'></i></a>&nbsp<a href='https://wiki.junge-piraten.de/wiki/"+val["wiki"]+"' target='_blank'>[WIKI]</a></td></tr>";
             $('#groups').append(zeile);
               //console.log(val);
             });
