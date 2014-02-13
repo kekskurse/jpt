@@ -28,12 +28,12 @@ foreach($bundeslaender as $bundesland)
 			$groupsBundesland[] = $group;
 		}
 	}
-	$text = "Gruppen in ".$bundesland.":<br>";
+	$text = "Gruppen in ".$bundesland.":\r\n";
 	foreach($groupsBundesland as $group)
 	{
 		if($group["aktiv"]==1)
 		{
-			$text.= '* [['.$group["wiki"].'|'.$group["groupName"].']]';
+			$text.= '* [['.$group["wiki"].'|'.$group["groupName"].']]\r\n';
 		}
 		$mediaWiki->setPageText("Vorlage:JPT/GroupBundesland/".$bundesland, $text);
 		
