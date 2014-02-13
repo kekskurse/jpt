@@ -13,12 +13,20 @@ class LoKo
 	}
 	public function getLoKoPeople()
 	{
+		if($_SESSION["bundesland"]!=null)
+		{
+			return false;
+		}
 		$sql = "SELECT `twitter` AS `name` FROM `lokomenschen`";
 		$res = $this->pdo->query($sql, array());
 		return $res;
 	}
 	public function addLoKoPeople($name)
 	{
+		if($_SESSION["bundesland"]!=null)
+		{
+			return false;
+		}
 		$sql = "INSERT INTO `lokomenschen`(`twitter`) VALUES (?)";
 		$res = $this->pdo->insertID($sql, array($name));
 		$this->log->addLog("LoKoPeople", "create", NULL, $res, $name, NULL, $name);
@@ -26,6 +34,10 @@ class LoKo
 	}
 	public function rmLoKoPeople($name)
 	{
+		if($_SESSION["bundesland"]!=null)
+		{
+			return false;
+		}
 		$sql = "DELETE FROM `lokomenschen` WHERE twitter = ?";
 		$this->pdo->insert($sql, array($name));
 		$this->log->addLog("LoKoPeople", "remove", NULL, NULL, $name, $name, NULL);
@@ -33,6 +45,10 @@ class LoKo
 	}
 	public function setNNTPData($user, $pw)
 	{
+		if($_SESSION["bundesland"]!=null)
+		{
+			return false;
+		}
 		$nntp = new \SSP\NNTP\NNTP();
 		$nntp->connect("news.junge-piraten.de"); //Return true or false
 		$login = $nntp->autentifizierung($user, $pw); //Return true or false
@@ -52,6 +68,10 @@ class LoKo
 	}
 	public function inviteNNTP($subject, $text, $test = true)
 	{
+		if($_SESSION["bundesland"]!=null)
+		{
+			return false;
+		}
 		$send = array();
 		if($test)
 		{
@@ -77,6 +97,10 @@ class LoKo
 	}
 	public function invitePeople($subject, $text, $mails, $test=true, $testTo = null)
 	{
+		if($_SESSION["bundesland"]!=null)
+		{
+			return false;
+		}
 		$send = array();
 		$text = mb_convert_encoding($text, "ISO-8859-1", "UTF-8");
 		$this->mail->From = 'loko@junge-piraten.de';
@@ -107,11 +131,16 @@ class LoKo
 	}
 	public function sendMail($subject, $text, $to, $peopleID=0, $test = true, $testTo)
 	{
+		$detais == null;
 		if($peopleID!=0)
 		{
 			$detais = $this->getPeople($peopleID);
 			$text = str_replace("%name%", $detais["name"], $text);
 			$text = str_replace("%group%", $detais["groupName"], $text);
+		}
+		if($_SESSION["bundesland"]!=null&&isset($detais)&&$detais["bundesland"]==$_SESSION["bundesland"])
+		{
+			return false;
 		}
 		$text = mb_convert_encoding($text, "ISO-8859-1", "UTF-8");
 		$this->mail->From = 'loko@junge-piraten.de';
@@ -140,6 +169,10 @@ class LoKo
 	}
 	public function createGroup($name, $mail, $more, $aktiv, $typ, $bundesland, $wiki)
 	{
+		if($_SESSION["bundesland"]!=$bundesland)
+		{
+			return false;
+		}
 		#var_dump($wiki);exit();
 		$sql = "INSERT INTO `lokogruppen`(`name`, `mail`, `more`, `aktiv`, `typ`, `bundesland`, `wiki`) VALUES (?, ?, ? , ?, ?, ?, ?)";
 		$param = array($name, $mail, $more, $aktiv, $typ, $bundesland, $wiki);
@@ -148,6 +181,10 @@ class LoKo
 	}
 	public function updateGroup($id, $name, $mail, $more, $aktiv, $typ, $bundesland, $wiki)
 	{
+		if($_SESSION["bundesland"]!=$bundesland)
+		{
+			return false;
+		}
 		$oldValue = $this->getGroups($id);
 		$sql = "UPDATE `lokogruppen` SET `name`=?,`mail`=?,`more`=?, `aktiv` = ?, `bundesland` = ?, `typ` = ?, `wiki`= ? WHERE id = ?";
 		$this->pdo->insert($sql, array($name, $mail, $more,$aktiv,$bundesland, $typ, $wiki, $id));
@@ -155,6 +192,10 @@ class LoKo
 	}
 	public function delGroup($id)
 	{
+		if($_SESSION["bundesland"]!=null)
+		{
+			return false;
+		}
 		$oldValue = $this->getGroups($id);
 		$sql = "DELETE FROM `lokogruppen` WHERE id = ?";
 		$this->pdo->insert($sql, array($id));
@@ -212,6 +253,14 @@ class LoKo
 	public function addPeople($name, $mail, $groupID, $more, $aktiv, $lokoAnsprechpartner)
 	{
 		$sql = "INSERT INTO `lokopeople`(`name`, `mail`, `group`, `more`, `aktiv`, `lokoAnsprechpartner`) VALUES (?, ?, ?, ?, ?, ?)";
+		if($_SESSION["bundesland"]!=null)
+		{
+			$group = $this->getGroups($groupID);
+			if($_SESSION["bundesland"]!=$group["bundesland"])
+			{
+				return false;
+			}
+		}
 		$param = array($name,$mail,$groupID,$more, $aktiv, $lokoAnsprechpartner);
 		$res = $this->pdo->insertID($sql, $param);
 		$this->log->addLog("LoKo People", "create", NULL, $res, $name, NULL, $this->log->var_dump($param));
@@ -220,6 +269,10 @@ class LoKo
 	public function updatePeople($id, $name, $mail, $groupID, $more, $aktiv, $lokoAnsprechpartner)
 	{
 		$oldValue = $this->getPeople($id);
+		if($oldValue==false)
+		{
+			return false;
+		}
 		$sql = "UPDATE `lokopeople` SET `name`=?,`mail`=?,`group`=?,`more`=?, `aktiv`=?, `lokoAnsprechpartner`=? WHERE id = ?";
 		$param = array($name, $mail, $groupID, $more, $aktiv, $lokoAnsprechpartner, $id);
 		$this->pdo->insert($sql, $param);
@@ -246,13 +299,24 @@ class LoKo
 	}
 	public function getPeople($id)
 	{
-		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE `lokopeople`.`id` = ?";
+		$sql = "SELECT `lokopeople`.`id`, `lokopeople`.`name`, `lokopeople`.`bundesland`, `lokopeople`.`mail`, `lokopeople`.`group`, `lokopeople`.`more`, `lokogruppen`.`name` as `groupName`, `lokoAnsprechpartner`, `lokopeople`.`aktiv`, `nntpName`  FROM `lokopeople`  LEFT JOIN `lokogruppen` ON `lokogruppen`.`id` = `lokopeople`.`group` WHERE `lokopeople`.`id` = ?";
 		$res = $this->pdo->query($sql, array($id));
+		if($_SESSION["bundesland"]!=null)
+		{
+		if($res[0]["bundesland"]!=$_SESSION["bundesland"])
+		{
+			return false;
+		}
+		}	
 		return $res[0];
 	}
 	public function delPeople($id)
 	{
 		$oldValue = $this->getPeople($id);
+		if($oldValue===false)	
+		{
+			return false;
+		}
 		$sql = "DELETE FROM `lokopeople` WHERE id = ?";
 		$this->pdo->insert($sql, array($id));
 		$this->log->addLog("LoKo People", "remove", NULL, $id, $oldValue["name"], $this->log->var_dump($oldValue), NULL);
