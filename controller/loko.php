@@ -153,8 +153,9 @@ $app->get("/loko/contact/search", function() use($app, $pdo)
 		{
 			$l["verwalter"]="bund";
 		}
+		$tmp[] = $l;
 	}
-	echo json_encode($list);
+	echo json_encode($tmp);
 });
 /*GROUPS */
 $app->get("/loko/groups", function() use($app)
