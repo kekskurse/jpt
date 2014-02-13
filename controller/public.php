@@ -37,3 +37,10 @@ $app->get("/logout", function() use ($app) {
 	$_SESSION["username"]=null;
 	$app->render('login.php', array());
 });
+$app->get("/public/api/groups.json", function () use($pdo)
+{
+	$loko = new Jupis\LoKo();
+	$loko->setPDO($pdo);
+	$groups = $loko->getGroups();
+	echo json_encode($groups);
+});
