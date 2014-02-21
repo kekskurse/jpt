@@ -42,7 +42,6 @@ $app->post("/loko/invite", function() use ($app, $pdo) {
 	#echo "Einladung wurde verschickt";
 	#var_dump($app->request->params('test'));
 });
-
 $app->get("/loko/invite/person", function() use($app, $pdo)
 {
 	$app->render('loko/invite_person.php', array());
@@ -72,7 +71,6 @@ $app->post("/loko/invite/person", function() use($app, $pdo)
 	#$send = $loko->invitePeople($app->request->params('subject'), $app->request->params('text'), $mails, $test, $_SESSION["username"]."@community.junge-piraten.de");
 	$app->render('smtpSend.php', array("send"=>$send, "next"=>"/loko/invite/person"));
 });
-
 $app->get("/loko/contact", function() use($app, $pdo)
 {
 	$loko = new Jupis\LoKo();

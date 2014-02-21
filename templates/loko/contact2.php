@@ -4,7 +4,7 @@
   $config["aktiv"]=array("LoKo", "Ansprechpartner");
   $config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/loko/contact/new"));
   $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Ansprechpartner", "href"=>"/loko/contact"));
-
+$config["menu"]="loko";
  //CONFIG ENDE
  include(__DIR__."/../style/top2.php"); 
  ?>

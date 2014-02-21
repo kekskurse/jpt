@@ -39,7 +39,7 @@ $app->get("/logout", function() use ($app) {
 	$_SESSION["username"]=null;
 	$app->render('login.php', array());
 });
-$app->get("/public/api/groups.json", function () use($pdo)
+$app->get("/public/api/groups.json", function () use($app, $pdo)
 {
 	$b = null;
 	if(isset($_SESSION["bundesland"]))
@@ -50,6 +50,11 @@ $app->get("/public/api/groups.json", function () use($pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$groups = $loko->listGroups();
+	if(isset($app->request->get("q")))
+	{
+		$groups = $loko->searchGroups($app->reqeust->get("q"));
+	}
+	
 	$_SESSION["bundesland"] = $b;
 	echo json_encode($groups);
 });

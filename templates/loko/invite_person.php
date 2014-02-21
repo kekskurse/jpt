@@ -4,7 +4,7 @@
   $config["aktiv"]=array("LoKo", "InvitePerson");
   #$config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/loko/contact/new"));
     $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Persöhnliche Einladung", "href"=>"/loko/invite/person"));
-
+$config["menu"]="loko";
  //CONFIG ENDE
  include(__DIR__."/../style/top2.php"); 
  ?>

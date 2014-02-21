@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+date_default_timezone_set("Europe/Berlin");
+
+
 #$_SESSION["BLA"]="ja";
 require '../vendor/autoload.php';
 require '../middelware/AllCapsMiddelware.php';
