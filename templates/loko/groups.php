@@ -1,21 +1,26 @@
- <?php include("../style/top.php"); ?>
+ <?php 
+ // CONFIG
+  $config["search"]=true;
+  $config["aktiv"]=array("LoKo", "Groups");
+  $config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/loko/groups/new"));
+  $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Gruppen", "href"=>"/loko/groups"));
+
+ //CONFIG ENDE
+ include(__DIR__."/../style/top2.php"); 
+ ?>
 
 
       
 
       <h3>Gruppen</h3>
-      <div style="float:right;width:300px;">
-        <input class="form-control" id="q" placeholder="Suche"><!--<input type="submit" id="suchen" value="Suchen" class="btn btn-default" style="float:right">!-->
-      </div>
       <p>Hier kannst du Gruppen verwalten. Diese Sind für die LoKo Einladungen und LoKo Ansprechpartner notwendig.</p>
-      <a href="/loko/groups/new" class="btn btn-default">Hinzufügen</a><br><br>
       <table class="table table-striped" style="width:100%" id="groups">
       </table>
       <script>
-      $("#q").keyup(function() {
+      $("#searchBox").keyup(function() {
           $("#groups tr").remove();
           $('#groups').append("<tr><th>Gruppen Name</th><th>Gruppen E-Mail</th><th>Bundesland</th><th>Tags</th><th>Weiteres</th><th>Aktionen</th></tr>");
-          $.getJSON( "/loko/groups/search?q="+$("#q").val(), function( data ) {
+          $.getJSON( "/loko/groups/search?q="+$("#searchBox").val(), function( data ) {
             $.each( data, function( key, val ) {
               var zeile = "<tr><td>"+val["name"]+"</td><td>"+val["mail"]+"</td><td>"+val["bundesland"]+"</td><td>";
               //val["aktiv"]
@@ -27,7 +32,7 @@
             });
           });
       });
-      $( "#q" ).trigger( "keyup" );
+      $( "#searchBox" ).trigger( "keyup" );
       </script>
       
       
@@ -36,4 +41,4 @@
 
 
     
- <?php include("../style/bottom.php"); ?>
+ <?php include(__DIR__."/../style/bottom2.php"); ?>

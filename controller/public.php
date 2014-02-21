@@ -4,7 +4,6 @@ $app->get("/login", function() use ($app) {
 });
 $app->post("/login", function() use ($app, $pdo) {
 	/* CHECK NNTP CONNECTION */
-	try {
 	$nntp = new SSP\NNTP\NNTP();
 	$nntp->connect("news.junge-piraten.de"); //Return true or false
 	$res = $pdo->query("SELECT * FROM `access` WHERE `username` = ?", array($app->request->params('user')));
@@ -29,19 +28,10 @@ $app->post("/login", function() use ($app, $pdo) {
 			$_SESSION["bundesland"]=$res[0]["bundesland"];
 			$_SESSION["zeitung"]=$res[0]["zeitung"];
 			$_SESSION["workflow"]=1;
+			$_SESSION["mail"]=$res[0]["mail"];
 			$app->redirect('/');
 		}
 		$app->render('login.php', array("login"=>$login));
-	}
-	} catch (Exception $e) {
-		$_SESSION["login"]=true;
-			$_SESSION["username"]="sspssp";
-			$_SESSION["pw"]="test";
-			$_SESSION["loko"]=1;
-			$_SESSION["bundesland"]=null;
-			$_SESSION["zeitung"]=1;
-			$_SESSION["workflow"]=1;
-			$app->redirect('/');
 	}
 });
 $app->get("/logout", function() use ($app) {

@@ -78,7 +78,14 @@ $app->get("/loko/contact", function() use($app, $pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$list = $loko->listPeople();
-	$app->render('loko/contact.php', array("q"=>$app->request->params('q')));
+	$app->render('loko/contact2.php', array("q"=>$app->request->params('q')));
+});
+$app->get("/loko/contact2", function() use($app, $pdo)
+{
+	$loko = new Jupis\LoKo();
+	$loko->setPDO($pdo);
+	$list = $loko->listPeople();
+	$app->render('loko/contact2.php', array("q"=>$app->request->params('q')));
 });
 $app->get("/loko/contact/edit", function() use($app, $pdo)
 {
