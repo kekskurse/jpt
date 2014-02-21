@@ -1,4 +1,4 @@
- <?php include("../style/top.php"); ?>
+ <?php include(__DIR__."/../style/top.php"); ?>
 
 
       
@@ -46,4 +46,4 @@
 
 
     
- <?php include("../style/bottom.php"); ?>
+ <?php include(__DIR__."/../style/bottom.php"); ?>

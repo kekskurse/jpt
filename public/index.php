@@ -31,6 +31,11 @@ if(isset($_SESSION["zeitung"])&&$_SESSION["zeitung"])
 {
 	require "../controller/zeitung.php";
 }
+if(isset($_SESSION["workflow"])&&$_SESSION["workflow"])
+{
+	require "../controller/workflow.php";
+}
+
 require "../controller/lists.php";
 
 $app->run();
