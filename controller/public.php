@@ -27,6 +27,7 @@ $app->post("/login", function() use ($app, $pdo) {
 			$_SESSION["loko"]=$res[0]["loko"];
 			$_SESSION["bundesland"]=$res[0]["bundesland"];
 			$_SESSION["zeitung"]=$res[0]["zeitung"];
+			$_SESSION["mail"]=$res[0]["mail"];
 			$app->redirect('/');
 		}
 		$app->render('login.php', array("login"=>$login));

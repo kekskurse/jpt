@@ -1,4 +1,14 @@
- <?php include("../style/top.php"); ?>
+ <?php 
+ // CONFIG
+  $config["search"]=true;
+  $config["aktiv"]=array("LoKo", "Groups");
+  #$config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/loko/groups/new"));
+  $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Gruppen", "href"=>"/loko/groups"), array("name"=>"Hinzufügen", "href"=>"/loko/groups/new"));
+
+ //CONFIG ENDE
+ include(__DIR__."/../style/top2.php"); 
+ ?>
+
 
 
       
@@ -53,4 +63,4 @@
 
 
     
- <?php include("../style/bottom.php"); ?>
+ <?php include(__DIR__."/../style/bottom2.php"); ?>

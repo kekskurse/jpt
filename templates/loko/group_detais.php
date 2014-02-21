@@ -7,7 +7,7 @@
       <div style="float:right;width:300px;">
         <input class="form-control" id="q" placeholder="Suche"><!--<input type="submit" id="suchen" value="Suchen" class="btn btn-default" style="float:right">!-->
       </div>
-      <p>Hier kannst du <b>lokale</b> Gruppen verwalten. Diese Sind für die LoKo Einladungen und LoKo Ansprechpartner notwendig.</p>
+      <p>Hier kannst du Gruppen verwalten. Diese Sind für die LoKo Einladungen und LoKo Ansprechpartner notwendig.</p>
       <a href="/loko/groups/new" class="btn btn-default">Hinzufügen</a><br><br>
       <table class="table table-striped" style="width:100%" id="groups">
       </table>
