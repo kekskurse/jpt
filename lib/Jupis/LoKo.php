@@ -205,7 +205,7 @@ class LoKo
 	public function listGroups($aktiv = 1)
 	{
 		
-		$sql = 'SELECT `id`, `name` AS `groupName`, `mail`, `more`, `aktiv`, `bundesland`, `typ`, `wiki`, CONCAT(`typ`, " ", `name`) AS `name` FROM `lokogruppen` WHERE 1 ';
+		$sql = 'SELECT `id`, `name` AS `groupName`, `mail`, `more`, `aktiv`, `bundesland`, `typ`, `wiki`, CONCAT(UPPER(`typ`), " ", `name`) AS `name` FROM `lokogruppen` WHERE 1 ';
 		$param = array();
 		if($aktiv==1)
 		{
