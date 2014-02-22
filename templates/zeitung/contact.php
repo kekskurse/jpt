@@ -2,7 +2,7 @@
  // CONFIG
   $config["search"]=true;
   $config["aktiv"]=array("Zeitung", "Ansprechpartner");
-  $config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/zeitung/contact"));
+  $config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/zeitung/contact/new"));
   $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Ansprechpartner", "href"=>"/loko/contact"));
   $config["menu"]="zeitung";
 
