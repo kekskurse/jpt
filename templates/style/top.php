@@ -36,7 +36,7 @@
       <div class="page-header">
         <div class="menu" style="float:right;">
           <ul class="nav nav-pills">  <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="/loko/contact">
       LoKo
     </a>
     <ul class="dropdown-menu">
@@ -48,7 +48,7 @@
     </ul>
   </li>
   <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="/zeitung/contact">
       Zeitung
     </a>
     <ul class="dropdown-menu">
