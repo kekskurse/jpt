@@ -50,7 +50,8 @@ $app->get("/public/api/groups.json", function () use($app, $pdo)
 	$loko = new Jupis\LoKo();
 	$loko->setPDO($pdo);
 	$groups = $loko->listGroups();
-	if(isset($app->request->get("q")))
+	$q = $app->request->get("q");
+	if(isset($q))
 	{
 		$groups = $loko->searchGroups($app->reqeust->get("q"));
 	}
