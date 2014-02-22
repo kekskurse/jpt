@@ -51,9 +51,9 @@ $app->get("/public/api/groups.json", function () use($app, $pdo)
 	$loko->setPDO($pdo);
 	$groups = $loko->listGroups();
 	$q = $app->request->get("q");
-	if(isset($q))
+	if(!empty($q))
 	{
-		$groups = $loko->searchGroups($app->reqeust->get("q"));
+		$groups = $loko->searchGroups($q);
 	}
 	
 	$_SESSION["bundesland"] = $b;
