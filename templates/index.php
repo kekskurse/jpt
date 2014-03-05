@@ -1,4 +1,10 @@
- <?php include("style/top.php"); ?>
+ <?php 
+  $config["search"]=true;
+  $config["aktiv"]=array();
+  #$config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/loko/contact/new"));
+  $config["breadcrumb"]=array(array("name"=>"Home"));
+
+ include(__DIR__."/style/top2.php"); ?>
 
 
       
@@ -112,4 +118,4 @@
 
 
     
- <?php include("style/bottom.php"); ?>
+ <?php include(__DIR__."/style/bottom2.php"); ?>
