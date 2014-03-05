@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/font-awesome.css" rel="stylesheet">
     <!-- Custom styles for this template -->
    <!-- <link href="grid.css" rel="stylesheet">!-->
 
@@ -36,7 +36,7 @@
       <div class="page-header">
         <div class="menu" style="float:right;">
           <ul class="nav nav-pills">  <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="/loko/contact">
       LoKo
     </a>
     <ul class="dropdown-menu">
@@ -48,7 +48,7 @@
     </ul>
   </li>
   <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="/zeitung/contact">
       Zeitung
     </a>
     <ul class="dropdown-menu">
@@ -62,6 +62,8 @@
     </a>
     <ul class="dropdown-menu">
       <li><a href="/lists">Listen</a></li>
+      <li><a href="/workflow/groups">Workflow Groups</a></li>
+      <li><a href="/workflow">Workflows</a></li>
     </ul>
   </li>
 </ul>

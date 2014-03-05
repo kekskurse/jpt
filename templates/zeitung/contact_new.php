@@ -1,4 +1,13 @@
- <?php include("../style/top.php"); ?>
+ <?php 
+ // CONFIG
+  $config["search"]=false;
+  $config["aktiv"]=array("Zeitung", "Ansprechpartner");
+  #$config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/zeitung/contact"));
+  $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Ansprechpartner", "href"=>"/loko/contact"));
+  $config["menu"]="zeitung";
+
+ //CONFIG ENDE
+ include(__DIR__."/../style/top2.php");  ?>
 <script src="/js/jquery.tagsinput.js"></script>
 <script>
 jQuery.curCSS = jQuery.css;
@@ -43,4 +52,4 @@ $('#topics').tagsInput({
 
 
     
- <?php include("../style/bottom.php"); ?>
+ <?php include(__DIR__."/../style/bottom2.php"); ?>

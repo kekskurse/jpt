@@ -1,14 +1,19 @@
- <?php include("../style/top.php"); ?>
+ <?php 
+ // CONFIG
+  $config["search"]=true;
+  $config["aktiv"]=array("Zeitung", "Ansprechpartner");
+  $config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/zeitung/contact/new"));
+  $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Ansprechpartner", "href"=>"/loko/contact"));
+  $config["menu"]="zeitung";
+
+ //CONFIG ENDE
+ include(__DIR__."/../style/top2.php");  ?>
 
 
       
 
       <h3>Ansprechpartner</h3>
-      <div style="float:right;width:300px;">
-        <input class="form-control" id="q" placeholder="Suche" value="<?php echo $q; ?>"><!--<input type="submit" id="suchen" value="Suchen" class="btn btn-default" style="float:right">!-->
-      </div>
       <p>Hier kannst du die Kontaktdaten für die Mitgliederzeitung eintragen.</p>
-      <a href="/zeitung/contact/new" class="btn btn-default">Hinzufügen</a><br><br>
       <table id="groups" class="table table-striped" style="width:100%">
         <tr><th>Name</th><th>Gruppe</th><th>E-Mail Adresse</th><th>Weiteres</th><th>Aktionen</th></tr>
         <?php
@@ -20,10 +25,10 @@
         
       </table>
       <script>
-      $("#q").keyup(function() {
+      $("#searchBox").keyup(function() {
           $("#groups tr").remove();
           $('#groups').append("<tr><th>Name</th><th>Topics</th><th>E-Mail Adresse</th><th>Weiteres</th><th>Aktionen</th></tr>");
-          $.getJSON( "/zeitung/contact/search?q="+$("#q").val(), function( data ) {
+          $.getJSON( "/zeitung/contact/search?q="+$("#searchBox").val(), function( data ) {
             $.each( data, function( key, val ) {
               //$('#groups').append("<tr><td>"+val["name"]+"</td><td>"+val["mail"]+"</td><td>"+val["bundesland"]+"</td><td>"+val["aktiv"]+"</td><td>"+val["more"]+"</td><td><a href='/loko/groups/edit?id="+val["id"]+"'><i class='fa fa-pencil'></i></a>&nbsp;<a href='/loko/groups/del?id="+val["id"]+"'><i class='fa fa-minus-circle'></i></a>&nbsp;<a href='/loko/groups/detais?id="+val["id"]+"'><i class='fa fa-eye'></i></a>&nbsp<a href='https://wiki.junge-piraten.de/wiki/"+val["wiki"]+"' target='_blank'>[WIKI]</a></td></tr>");
               $('#groups').append("<tr><td>"+val["name"]+"</td><td>"+val["topics"]+"</td><td>"+val["mail"]+"</td><td>"+val["more"]+"</td><td><a href='/zeitung/contact/edit?id="+val["id"]+"'><i class='fa fa-pencil'></i></a>&nbsp;<a href='/zeitung/contact/del?id="+val["id"]+"'><i class='fa fa-minus-circle'></i></a></td></tr>");
@@ -31,7 +36,7 @@
             });
           });
       });
-      $( "#q" ).trigger( "keyup" );
+      $( "#searchBox" ).trigger( "keyup" );
       </script>
       
 
@@ -39,4 +44,4 @@
 
 
     
- <?php include("../style/bottom.php"); ?>
+ <?php include(__DIR__."/../style/bottom2.php"); ?>

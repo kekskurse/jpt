@@ -4,7 +4,7 @@
   $config["aktiv"]=array("LoKo", "Groups");
   #$config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/loko/groups/new"));
   $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Gruppen", "href"=>"/loko/groups"), array("name"=>"Hinzufügen", "href"=>"/loko/groups/new"));
-
+  $config["menu"]="loko";
  //CONFIG ENDE
  include(__DIR__."/../style/top2.php"); 
  ?>

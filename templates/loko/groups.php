@@ -4,7 +4,7 @@
   $config["aktiv"]=array("LoKo", "Groups");
   $config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/loko/groups/new"));
   $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Gruppen", "href"=>"/loko/groups"));
-
+  $config["menu"]="loko";
  //CONFIG ENDE
  include(__DIR__."/../style/top2.php"); 
  ?>
@@ -14,7 +14,7 @@
 
       <h3>Gruppen</h3>
       <p>Hier kannst du Gruppen verwalten. Diese Sind für die LoKo Einladungen und LoKo Ansprechpartner notwendig.</p>
-      <table class="table table-striped" style="width:100%" id="groups">
+      <table class="table table-striped" id="groups">
       </table>
       <script>
       $("#searchBox").keyup(function() {

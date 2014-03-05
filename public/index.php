@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+date_default_timezone_set("Europe/Berlin");
+
+
 #$_SESSION["BLA"]="ja";
 require '../vendor/autoload.php';
 require '../middelware/AllCapsMiddelware.php';
@@ -31,6 +35,11 @@ if(isset($_SESSION["zeitung"])&&$_SESSION["zeitung"])
 {
 	require "../controller/zeitung.php";
 }
+if(isset($_SESSION["workflow"])&&$_SESSION["workflow"])
+{
+	require "../controller/workflow.php";
+}
+
 require "../controller/lists.php";
 
 $app->run();
