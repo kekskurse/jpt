@@ -35,7 +35,7 @@
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="#">JPT<span style="color:red">V</span>2</a>
+					<a class="navbar-brand" href="/">JPT<span style="color:red">V</span>2</a>
 				</div>
 				<ul class="nav navbar-nav">
         <li class="dropdown" data-position="right" data-step="4" data-intro="Hier kannst du dein Profil bearbeiten.">
@@ -50,7 +50,7 @@
 				<ul class="nav navbar-nav" data-position="right" data-step="3" data-intro="Hier ist die &uuml;bersicht deiner Arbeitsbereiche">
         <li id="linkLoKo"><a href="/loko/contact">LoKo</a></li>
         <li id="linkZeitung"><a href="/zeitung/contact">Zeitung</a></li>
-        <li id="linkUser"><a href="/user/">User</a></li>
+        <!--<li id="linkUser"><a href="/user/">User</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gruppen <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -65,7 +65,7 @@
             <li class="divider"></li>
             <li><a href="#">Neue Gruppe</a></li>
           </ul>
-        </li>
+        </li>!-->
       </ul>
 				<ul class="nav navbar-nav navbar-right" data-position="left" data-step="2" data-intro="Hier findest du eine &uuml;bersicht der Aktionen f&uuml;r diese Seite">
 					<?php if(isset($config["actionMenu"])) { ?>
@@ -103,7 +103,14 @@
 	<div class="row">
 			<div class="col-md-2">
 <?php 
+if($config["menu"]!=null)
+{
 	include(__DIR__."/../".$config["menu"]."/menu.inc.php");
+}
+else
+{
+	echo "<i>Keine Menüpunkte</i>";
+}
 ?>
 			</div>
 			<div class="col-md-10">
