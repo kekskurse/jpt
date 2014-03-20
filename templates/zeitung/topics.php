@@ -2,7 +2,7 @@
   $config["search"]=true;
   $config["aktiv"]=array("Zeitung", "Topics");
   #$config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/zeitung/contact"));
-  $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Ansprechpartner", "href"=>"/loko/contact"));
+  $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"Zeitung", "href"=>"/zeitung/contact"), array("name"=>"Themenliste", "href"=>"/zeitung/topics"));
   $config["menu"]="zeitung";
  include(__DIR__."/../style/top2.php"); ?>
 

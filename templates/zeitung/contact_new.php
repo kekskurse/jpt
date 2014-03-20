@@ -3,7 +3,7 @@
   $config["search"]=false;
   $config["aktiv"]=array("Zeitung", "Ansprechpartner");
   #$config["actionMenu"]=array(array("name"=>"Hinzufügen", "href"=>"/zeitung/contact"));
-  $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"LoKo", "href"=>"/loko/contact"), array("name"=>"Ansprechpartner", "href"=>"/loko/contact"));
+  $config["breadcrumb"]=array(array("name"=>"Home"), array("name"=>"Zeitung", "href"=>"/zeitung/contact"), array("name"=>"Ansprechpartner", "href"=>"/zeitung/contact"), array("name"=>"Hinzufügen", "href"=>"/zeitung/contact/new"));
   $config["menu"]="zeitung";
 
  //CONFIG ENDE
