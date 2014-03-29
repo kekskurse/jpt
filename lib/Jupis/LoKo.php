@@ -131,7 +131,7 @@ class LoKo
 	}
 	public function sendMail($subject, $text, $to, $peopleID=0, $test = true, $testTo)
 	{
-		$detais == null;
+		$detais = null;
 		if($peopleID!=0)
 		{
 			$detais = $this->getPeople($peopleID);
